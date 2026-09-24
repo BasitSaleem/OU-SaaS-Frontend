@@ -1,0 +1,351 @@
+@import "tailwindcss";
+
+@theme inline {
+  --font-heading: var(--font-outfit);
+  --font-sans: var(--font-dm-sans);
+
+  --color-purple: var(--purple);
+  --color-purple-d: var(--purple-d);
+  --color-purple-10: var(--purple-10);
+  --color-purple-05: var(--purple-05);
+  --color-coral: var(--coral);
+  --color-coral-10: var(--coral-10);
+  --color-magenta: var(--magenta);
+  --color-charcoal: var(--charcoal);
+  --color-g800: var(--g800);
+  --color-g700: var(--g700);
+  --color-g600: var(--g600);
+  --color-g500: var(--g500);
+  --color-g400: var(--g400);
+  --color-g300: var(--g300);
+  --color-g200: var(--g200);
+  --color-g100: var(--g100);
+  --color-surface: var(--surface);
+  --color-dark: var(--dark);
+
+  --breakpoint-nav: 768px;
+}
+
+:root {
+  --purple: #795cf5;
+  --purple-d: #6b4fd9;
+  --purple-10: rgba(121, 92, 245, 0.1);
+  --purple-05: rgba(121, 92, 245, 0.04);
+  --purple-glow: rgba(121, 92, 245, 0.22);
+  --coral: #f95c5b;
+  --coral-10: rgba(249, 92, 91, 0.1);
+  --coral-glow: rgba(249, 92, 91, 0.18);
+  --magenta: #b11e67;
+  --charcoal: #231f20;
+  --g800: #1f2937;
+  --g700: #374151;
+  --g600: #4b5563;
+  --g500: #6b7280;
+  --g400: #9ca3af;
+  --g300: #d1d5db;
+  --g200: #e5e7eb;
+  --g100: #f3f4f6;
+  --surface: #fafafa;
+  --white: #ffffff;
+  --dark: #1a1a1a;
+
+  --ease: cubic-bezier(0.23, 1, 0.32, 1);
+  --ease-io: cubic-bezier(0.77, 0, 0.175, 1);
+  --ease-h: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+
+  --nav-h: 72px;
+
+  --fs-display: clamp(2.75rem, 1.1rem + 5.2vw, 6.75rem);
+  --fs-h2: clamp(2.1rem, 1.2rem + 3vw, 4.5rem);
+  --fs-h3: clamp(1.375rem, 1rem + 1vw, 2rem);
+  --fs-lead: clamp(1.05rem, 0.9rem + 0.5vw, 1.375rem);
+  --fs-body: clamp(0.95rem, 0.9rem + 0.15vw, 1.0625rem);
+  --fs-small: 0.8125rem;
+}
+
+@media (max-width: 768px) {
+  :root {
+    --nav-h: 74px;
+  }
+}
+
+@utility wrapper {
+  margin: 0 16px;
+
+  @media (min-width: 768px) {
+    margin: 0 32px;
+  }
+
+  @media (min-width: 1024px) {
+    margin: 0 40px;
+  }
+
+  @media (min-width: 1280px) {
+    margin: 0 40px;
+  }
+
+  @media (min-width: 1440px) {
+    max-width: 1280px;
+    margin: 0 auto;
+  }
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--surface);
+  color: var(--charcoal);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ============ HERO animations ============ */
+@keyframes meshA {
+  0% { transform: translate(0, 0) scale(1); }
+  20% { transform: translate(80px, 40px) scale(1.1); }
+  40% { transform: translate(-40px, 80px) scale(0.96); }
+  60% { transform: translate(60px, -30px) scale(1.06); }
+  80% { transform: translate(-50px, 50px) scale(1.02); }
+  100% { transform: translate(0, 0) scale(1); }
+}
+@keyframes meshB {
+  0% { transform: translate(0, 0) scale(1); }
+  25% { transform: translate(-80px, 60px) scale(1.12); }
+  50% { transform: translate(40px, -50px) scale(0.93); }
+  75% { transform: translate(-60px, -30px) scale(1.08); }
+  100% { transform: translate(0, 0) scale(1); }
+}
+@keyframes meshC {
+  0% { transform: translate(0, 0) scale(1); }
+  33% { transform: translate(70px, -50px) scale(1.08); }
+  66% { transform: translate(-50px, 40px) scale(0.95); }
+  100% { transform: translate(0, 0) scale(1); }
+}
+@keyframes meshD {
+  0% { transform: translate(0, 0) scale(1); }
+  20% { transform: translate(-60px, 70px) scale(1.07); }
+  50% { transform: translate(50px, -40px) scale(0.94); }
+  80% { transform: translate(-30px, 20px) scale(1.04); }
+  100% { transform: translate(0, 0) scale(1); }
+}
+@keyframes meshE {
+  0% { transform: translate(0, 0) scale(1); }
+  30% { transform: translate(-60px, -40px) scale(1.1); }
+  60% { transform: translate(40px, 30px) scale(0.96); }
+  100% { transform: translate(0, 0) scale(1); }
+}
+
+@keyframes splashIn {
+  0% { opacity: 0; transform: scale(0.6); }
+  100% { opacity: 1; transform: scale(1); }
+}
+@keyframes splashSpin {
+  from { transform: scale(1) rotate(0deg); }
+  to { transform: scale(1) rotate(360deg); }
+}
+@keyframes revealOut {
+  to { clip-path: inset(0 0 100% 0); opacity: 0; }
+}
+
+@keyframes wIn {
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes gradFlow {
+  0% { background-position: 0% 0%; }
+  25% { background-position: 100% 50%; }
+  50% { background-position: 50% 100%; }
+  75% { background-position: 0% 50%; }
+  100% { background-position: 0% 0%; }
+}
+@keyframes hUp {
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes marquee {
+  to { transform: translateX(-50%); }
+}
+@keyframes proofSpin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+@keyframes livePulse {
+  0%, 100% { opacity: 1; box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.3); }
+  50% { opacity: 0.8; box-shadow: 0 0 0 4px rgba(34, 197, 94, 0); }
+}
+
+/* ============ ECOSYSTEM stack cards ============
+   Kept as hand-written CSS rather than Tailwind utilities: the cascade here
+   (base position -> risen modifier -> group-hover fan-out -> reduced-motion
+   !important overrides, all sharing the exact same transform values that the
+   float keyframes also reference) depends on source-order/specificity that
+   Tailwind's utility classes can't reliably reproduce. */
+.stack-wrap {
+  --fan-x: 148px;
+}
+@media (max-width: 480px) {
+  .stack-wrap {
+    --fan-x: 80px;
+  }
+}
+
+
+@media (min-width: 481px) and (max-width: 900px) {
+  .stack-wrap {
+    --fan-x: 108px;
+  }
+}
+
+.stack-card {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transition: transform 0.55s var(--ease-h), box-shadow 0.45s var(--ease-h), filter 0.45s var(--ease);
+  will-change: transform;
+}
+.stack-card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 28px;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.35), inset 0 0 0 1px rgba(255, 255, 255, 0.14);
+  pointer-events: none;
+}
+
+.stack-card.pos-left {
+  z-index: 1;
+  transform: translate(calc(-50% - var(--fan-x)), calc(-50% + 14px + 140px)) rotate(-8deg) scale(0.92);
+  opacity: 0;
+  transition: transform 0.85s var(--ease-h), opacity 0.7s var(--ease), box-shadow 0.45s var(--ease-h), filter 0.45s var(--ease);
+}
+.stack-card.pos-front {
+  z-index: 3;
+  transform: translate(-50%, calc(-50% + 140px)) rotate(0deg) scale(1.06);
+  opacity: 0;
+  transition: transform 0.85s var(--ease-h), opacity 0.7s var(--ease), box-shadow 0.45s var(--ease-h), filter 0.45s var(--ease);
+}
+.stack-card.pos-right {
+  z-index: 2;
+  transform: translate(calc(-50% + var(--fan-x)), calc(-50% + 14px + 140px)) rotate(8deg) scale(0.92);
+  opacity: 0;
+  transition: transform 0.85s var(--ease-h), opacity 0.7s var(--ease), box-shadow 0.45s var(--ease-h), filter 0.45s var(--ease);
+}
+
+.stack-card.risen.pos-left {
+  transform: translate(calc(-50% - var(--fan-x)), calc(-50% + 14px)) rotate(-8deg) scale(0.92);
+  opacity: 1;
+  animation: floatC1 5.5s var(--ease-io) 1s infinite;
+}
+.stack-card.risen.pos-front {
+  transform: translate(-50%, -50%) rotate(0deg) scale(1.06);
+  opacity: 1;
+  animation: floatC2 6s var(--ease-io) 1.2s infinite;
+}
+.stack-card.risen.pos-right {
+  transform: translate(calc(-50% + var(--fan-x)), calc(-50% + 14px)) rotate(8deg) scale(0.92);
+  opacity: 1;
+  animation: floatC3 5.8s var(--ease-io) 1.4s infinite;
+}
+
+@keyframes floatC1 {
+  0%, 100% { transform: translate(calc(-50% - var(--fan-x)), calc(-50% + 14px)) rotate(-8deg) scale(0.92); }
+  50% { transform: translate(calc(-50% - var(--fan-x)), calc(-50% + 4px)) rotate(-8deg) scale(0.92); }
+}
+@keyframes floatC2 {
+  0%, 100% { transform: translate(-50%, -50%) rotate(0deg) scale(1.06); }
+  50% { transform: translate(-50%, calc(-50% - 10px)) rotate(0deg) scale(1.06); }
+}
+@keyframes floatC3 {
+  0%, 100% { transform: translate(calc(-50% + var(--fan-x)), calc(-50% + 14px)) rotate(8deg) scale(0.92); }
+  50% { transform: translate(calc(-50% + var(--fan-x)), calc(-50% + 4px)) rotate(8deg) scale(0.92); }
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .stack-wrap:hover .stack-card {
+    animation: none;
+  }
+  .stack-wrap:hover .stack-card.pos-left {
+    transform: translate(calc(-50% - 186px), calc(-50% - 4px)) rotate(-11deg) scale(0.94);
+    filter: brightness(1.05);
+  }
+  .stack-wrap:hover .stack-card.pos-front {
+    transform: translate(-50%, calc(-50% - 16px)) rotate(0deg) scale(1.1);
+    box-shadow: 0 40px 70px -18px rgba(20, 10, 40, 0.4);
+  }
+  .stack-wrap:hover .stack-card.pos-right {
+    transform: translate(calc(-50% + 186px), calc(-50% - 4px)) rotate(11deg) scale(0.94);
+    filter: brightness(1.05);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .stack-card, .stack-card.pos-left, .stack-card.pos-front, .stack-card.pos-right {
+    transition: none !important;
+    animation: none !important;
+    opacity: 1 !important;
+  }
+  .stack-card.pos-left { transform: translate(calc(-50% - var(--fan-x)), calc(-50% + 14px)) rotate(-8deg) scale(0.92) !important; }
+  .stack-card.pos-front { transform: translate(-50%, -50%) rotate(0deg) scale(1.06) !important; }
+  .stack-card.pos-right { transform: translate(calc(-50% + var(--fan-x)), calc(-50% + 14px)) rotate(8deg) scale(0.92) !important; }
+}
+
+.stack-icon-glow {
+  position: relative;
+  width: 52px;
+  height: 52px;
+  margin-bottom: 22px;
+}
+.stack-icon-glow::before {
+  content: "";
+  position: absolute;
+  inset: -14px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.55), transparent 70%);
+  filter: blur(6px);
+}
+.stack-icon-glow svg {
+  position: relative;
+  width: 52px;
+  height: 52px;
+  padding: 13px;
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.16);
+  backdrop-filter: blur(6px);
+  color: var(--white);
+}
+@media (max-width: 900px) {
+  .stack-icon-glow {
+    width: 38px;
+    height: 38px;
+    margin-bottom: 12px;
+  }
+  .stack-icon-glow svg {
+    width: 38px;
+    height: 38px;
+    padding: 9px;
+  }
+}
+
+@layer utilities {
+  /* Toggled imperatively by useStickyCardStack (rAF-measured overlap), not by React state. */
+  .is-stacked {
+    transform: scale(0.96) translateY(-8px);
+    box-shadow: 0 4px 20px -8px rgba(0, 0, 0, 0.15);
+  }
+
+  /* Per-word stagger delay set via --word-delay inline style; keeps gradFlow's own delay independent. */
+  .hero-word {
+    animation: wIn 0.65s var(--ease) var(--word-delay, 0s) forwards;
+  }
+  .hero-word-hl {
+    background-image: linear-gradient(135deg, #795cf5 0%, #b11e67 18%, #f95c5b 35%, #9b7bf7 50%, #b11e67 65%, #795cf5 82%, #f95c5b 100%);
+    background-size: 300% 300%;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+    animation:
+      wIn 0.65s var(--ease) var(--word-delay, 0s) forwards,
+      gradFlow 8s ease-in-out infinite 2.2s;
+  }
+}
+
