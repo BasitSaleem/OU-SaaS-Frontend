@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import clsx from "clsx";
-import logo from "../../../../public/assets/logo.png";
+import logo from "../../../../public/assets/logos/owners-universe.svg";
 
 interface LogoProps {
   href?: string;

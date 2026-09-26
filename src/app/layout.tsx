@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { DM_Sans, Outfit } from "next/font/google";
+import { DM_Sans, Geist, Geist_Mono, Outfit } from "next/font/google";
 import Navbar from "@/components/pages/navbar/Navbar";
 import CustomCursor from "@/components/CustomCursor";
 import "./globals.css";
@@ -17,6 +17,18 @@ const dmSans = DM_Sans({
   variable: "--font-dm-sans",
 });
 
+const geist = Geist({
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
+  variable: "--font-geist",
+});
+
+const geistMono = Geist_Mono({
+  subsets: ["latin"],
+  weight: ["400", "500"],
+  variable: "--font-geist-mono",
+});
+
 export const metadata: Metadata = {
   title: "Owners Universe — Business Software for Service Industries",
   description:
@@ -25,7 +37,11 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" data-scroll-behavior="smooth" className={`${outfit.variable} ${dmSans.variable}`}>
+    <html
+      lang="en"
+      data-scroll-behavior="smooth"
+      className={`${outfit.variable} ${dmSans.variable} ${geist.variable} ${geistMono.variable}`}
+    >
       <body className="font-sans antialiased">
         <Navbar />
         <CustomCursor />

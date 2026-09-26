@@ -1,0 +1,64 @@
+"use client";
+
+import { useEffect, useRef } from "react";
+
+/** Drives the "Software" hoverword: a coral→purple spotlight that eases toward the pointer. */
+export function useHoverWordSpotlight<T extends HTMLElement>() {
+  const ref = useRef<T>(null);
+
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+
+    const pos = { x: 0, y: 0, tx: 0, ty: 0 };
+    let raf = 0;
+
+    function tick() {
+      pos.x += (pos.tx - pos.x) * 0.22;
+      pos.y += (pos.ty - pos.y) * 0.22;
+      el!.style.setProperty("--mx", `${pos.x.toFixed(1)}px`);
+      el!.style.setProperty("--my", `${pos.y.toFixed(1)}px`);
+      raf = Math.abs(pos.tx - pos.x) + Math.abs(pos.ty - pos.y) > 0.3 ? requestAnimationFrame(tick) : 0;
+    }
+
+    function getLocal(e: PointerEvent): [number, number] {
+      const b = el!.getBoundingClientRect();
+      return [e.clientX - b.left, e.clientY - b.top];
+    }
+
+    function onEnter(e: PointerEvent) {
+      const [x, y] = getLocal(e);
+      pos.x = x;
+      pos.y = y;
+      pos.tx = x;
+      pos.ty = y;
+      tick();
+      el!.style.transitionDuration = "450ms";
+      el!.style.setProperty("--spot", "clamp(90px, 11vw, 170px)");
+    }
+
+    function onMove(e: PointerEvent) {
+      const [x, y] = getLocal(e);
+      pos.tx = x;
+      pos.ty = y;
+      if (!raf) raf = requestAnimationFrame(tick);
+    }
+
+    function onLeave() {
+      el!.style.transitionDuration = "";
+      el!.style.setProperty("--spot", "0px");
+    }
+
+    el.addEventListener("pointerenter", onEnter);
+    el.addEventListener("pointermove", onMove);
+    el.addEventListener("pointerleave", onLeave);
+    return () => {
+      el.removeEventListener("pointerenter", onEnter);
+      el.removeEventListener("pointermove", onMove);
+      el.removeEventListener("pointerleave", onLeave);
+      if (raf) cancelAnimationFrame(raf);
+    };
+  }, []);
+
+  return ref;
+}

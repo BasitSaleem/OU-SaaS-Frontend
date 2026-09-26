@@ -1,19 +1,18 @@
 import Hero from "@/components/pages/landing-page/Hero";
 import Products from "@/components/pages/landing-page/Products";
-import Marquee from "@/components/pages/landing-page/Marquee";
-import Ecosystem from "@/components/pages/landing-page/Ecosystem";
-import Proof from "@/components/pages/landing-page/Proof";
-import Closer from "@/components/pages/landing-page/Closer";
+import Ticker from "@/components/pages/landing-page/Ticker";
+import Why from "@/components/pages/landing-page/Why";
+import Owners from "@/components/pages/landing-page/Owners";
+import FinalCta from "@/components/pages/landing-page/FinalCta";
 
 const Page = () => (
-  <main>
+  <main className="font-display" id="main">
     <Hero />
     <Products />
-    <Marquee />
-    <Ecosystem />
-    <Proof />
-    <Closer />
-    {/* Footer is already wired in the route group layout. */}
+    <Ticker />
+    <Why />
+    <Owners />
+    <FinalCta />
   </main>
 );
 

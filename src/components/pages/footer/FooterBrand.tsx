@@ -1,11 +1,10 @@
 import Logo from "@/components/pages/navbar/Logo";
-import Paragraph from "@/components/pages/typography/Paragraph";
 import { FOOTER_TAGLINE } from "@/constant/navigationData";
 
 const FooterBrand: React.FC = () => (
-  <div className="max-w-[290px] text-left">
-    <Logo imgHeight={28} className="mb-4 justify-start" />
-    <Paragraph className="!text-[14px] lg:!text-[14px] !leading-[1.65] !text-g500">{FOOTER_TAGLINE}</Paragraph>
+  <div className="flex flex-col items-start gap-[22px]">
+    <Logo imgHeight={52} className="justify-start rounded-xl transition-opacity duration-150 hover:opacity-85" />
+    <p className="max-w-[30em] text-base leading-[1.6] text-neutral">{FOOTER_TAGLINE}</p>
   </div>
 );
 

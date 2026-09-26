@@ -1,85 +1,64 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
 import clsx from "clsx";
 import Logo from "./Logo";
-import NavLinks from "./NavLinks";
+import NavPrimaryLinks from "./NavPrimaryLinks";
+import NavLoginLink from "./NavLoginLink";
+import NavBurgerButton from "./NavBurgerButton";
+import NavProgressBar from "./NavProgressBar";
 import MobileMenu from "./MobileMenu";
-import ButtonPill from "@/components/button/ButtonPill";
-import { useNavScroll } from "@/hooks/useNavScroll";
-import { LOGIN_URL } from "@/constant/navigationData";
+import { useNavScrollState } from "@/hooks/useNavScrollState";
 
 const Navbar: React.FC = () => {
   const pathname = usePathname();
-  const isHome = pathname === "/";
-  const [menuOpen, setMenuOpen] = useState(false);
+  const [mobileOpen, setMobileOpen] = useState(false);
+  const [lastPathname, setLastPathname] = useState(pathname);
+  const { scrolled, hidden, progress } = useNavScrollState(mobileOpen);
+  const barActive = scrolled || mobileOpen;
 
-  const scrolled = useNavScroll(isHome);
-  const accentColor = isHome ? "[#F95C5B]" : "[#795CF5]";
+  if (pathname !== lastPathname) {
+    setLastPathname(pathname);
+    setMobileOpen(false);
+  }
+
+  useEffect(() => {
+    document.body.style.overflow = mobileOpen ? "hidden" : "";
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [mobileOpen]);
 
   return (
-    <>
-      <nav
+    <header
+      className={clsx(
+        "fixed inset-x-0 top-0 z-50 px-[clamp(20px,5vw,80px)] pt-3 pb-3 font-display transition-transform duration-500 ease-[var(--ease)]",
+        hidden && "-translate-y-[calc(100%+12px)]"
+      )}
+    >
+      <div
         className={clsx(
-          "fixed top-4 left-1/2 z-[1000] flex h-14 w-4/5 max-w-[1100px] -translate-x-1/2 items-center justify-between rounded-full border py-0 pr-2 pl-7 transition-[background,box-shadow,border-color] duration-400 ease-[var(--ease)]",
-          "max-nav:top-3 max-nav:h-[50px] max-nav:max-w-[calc(100%-32px)] max-nav:pr-2 max-nav:pl-5",
-          isHome && !scrolled
-            ? "border-white/30 bg-white/[0.37]"
-            : "border-white/50 bg-white/[0.82] shadow-[0_4px_24px_rgba(0,0,0,0.06)] backdrop-blur-2xl backdrop-saturate-150"
+          "relative mx-auto grid h-16 max-w-[1240px] grid-cols-[1fr_auto_1fr] items-center gap-4 rounded-full border border-transparent pr-2.5 pl-4 transition-[background-color,border-color,box-shadow,max-width,height] duration-500 ease-[var(--ease)]",
+          "max-nav:flex max-nav:h-[58px] max-nav:justify-between max-nav:pl-3",
+          barActive &&
+            "max-w-[880px] h-[60px] border-black/[0.07] bg-[#fcfcfb]/[0.78] shadow-[inset_0_1px_0_rgba(255,255,255,0.9),0_1px_2px_rgba(11,11,11,0.04),0_18px_40px_-22px_rgba(11,11,11,0.35)] backdrop-blur-2xl backdrop-saturate-[1.8]"
         )}
       >
-        <Logo />
+        <Logo imgHeight={scrolled ? 40 : 44} className="justify-self-start" />
 
-        <div className="absolute left-1/2 hidden -translate-x-1/2 items-center gap-x-[clamp(16px,2.5vw,32px)] nav:flex">
-          <NavLinks
-            linkClassName={clsx(
-              "text-[13px] font-medium tracking-[0.01em] whitespace-nowrap text-charcoal transition-colors duration-200 ease-[var(--ease)]",
-              isHome
-                ? "[@media(hover:hover)_and_(pointer:fine)]:hover:text-charcoal"
-                : "[@media(hover:hover)_and_(pointer:fine)]:hover:text-purple"
-            )}
-            containerClassName="flex items-center gap-x-[clamp(16px,2.5vw,32px)]"
-          />
+        <NavPrimaryLinks />
+
+        <div className="flex items-center justify-self-end gap-1.5">
+          <NavLoginLink />
+          <NavBurgerButton open={mobileOpen} onClick={() => setMobileOpen((v) => !v)} />
         </div>
 
-        <ButtonPill
-          text="Login"
-          bgColor={accentColor}
-          hoverBgColor={isHome ? "[#e8504f]" : "[#6B4FD9]"}
-          hoverGlow={isHome ? "rgba(249,92,91,.25)" : "var(--purple-glow)"}
-          url={LOGIN_URL}
-          target="_blank"
-          className="hidden nav:inline-block"
-        />
+        <NavProgressBar progress={progress} visible={scrolled} />
+      </div>
 
-        <button
-          type="button"
-          aria-label="Menu"
-          onClick={() => setMenuOpen((v) => !v)}
-          className="flex h-8 w-8 flex-col items-center justify-center gap-[5px] nav:hidden"
-        >
-          <span
-            className={clsx(
-              "h-[1.5px] w-[18px] rounded-sm bg-charcoal transition-transform duration-300 ease-[var(--ease)]",
-              menuOpen && "translate-x-[2.5px] translate-y-[2.5px] rotate-45"
-            )}
-          />
-          <span
-            className={clsx(
-              "h-[1.5px] w-[18px] rounded-sm bg-charcoal transition-transform duration-300 ease-[var(--ease)]",
-              menuOpen && "translate-x-[2.5px] -translate-y-[2.5px] -rotate-45"
-            )}
-          />
-        </button>
-      </nav>
-
-      <MobileMenu
-        isOpen={menuOpen}
-        accentColor={accentColor}
-        onLinkClick={() => setMenuOpen(false)}
-      />
-    </>
+      <MobileMenu isOpen={mobileOpen} onLinkClick={() => setMobileOpen(false)} />
+    </header>
   );
 };
 

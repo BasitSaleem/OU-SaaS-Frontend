@@ -1,60 +1,51 @@
-export interface HeroWord {
-  text: string;
-  highlight?: boolean;
-}
+export const HERO_KICKER = "The platform behind Owners Pulse & Owners Inventory";
 
-export const HERO_TITLE_WORDS: HeroWord[] = [
-  { text: "Business" },
-  { text: "Software" },
-  { text: "for" },
-  { text: "Service", highlight: true },
-  { text: "Industries", highlight: true },
-];
+export const HERO_BODY =
+  "We build tools that help business owners grow, from marketing automation for home services to inventory and operations management for retail. One account. All products.";
 
-export const HERO_TITLE_BASE_DELAY = 1.55;
-export const HERO_TITLE_WORD_STEP = 0.07;
+export const HERO_STAGE_CAPTION = "One account. All products.";
 
-export const HERO_SUB =
-  "We build tools that help business owners grow — from marketing automation for home services to inventory and operations management for retail. One account. All products.";
+export const HERO_PULSE_NODE = {
+  role: "Growth",
+  metricLabel: "New leads · this week",
+  metricValue: "128",
+  metricDelta: "+18%",
+  sparkArea:
+    "0,64 0.0,48.4 25.5,42.7 50.9,45.5 76.4,37.0 101.8,39.8 127.3,31.3 152.7,32.7 178.2,22.8 203.6,25.6 229.1,14.2 254.5,17.1 280.0,5.7 280,64",
+  sparkLine:
+    "0.0,48.4 25.5,42.7 50.9,45.5 76.4,37.0 101.8,39.8 127.3,31.3 152.7,32.7 178.2,22.8 203.6,25.6 229.1,14.2 254.5,17.1 280.0,5.7",
+  rows: [
+    { text: "4.9 average · 212 Google reviews", icon: "star" as const },
+    { text: "46 calls answered by AI receptionist", icon: "phone" as const },
+  ],
+};
 
-export interface HeroTrustItem {
-  label: string;
-  icon: "live" | "check" | "shield";
-}
+export const HERO_INVENTORY_NODE = {
+  role: "Operations",
+  metricLabel: "Sales · today",
+  metricValue: "$12,480",
+  metricDelta: "+9%",
+  bars: [0.46, 0.62, 0.38, 0.74, 0.58, 0.88, 0.7],
+  rows: [
+    { text: "1,284 SKUs tracked · 3 locations", icon: "package" as const },
+    { text: "Low stock · reorder sent", icon: "alert" as const, warn: true },
+  ],
+};
 
-export const HERO_TRUST_ITEMS: HeroTrustItem[] = [
-  { label: "2 products live", icon: "live" },
-  { label: "No contracts", icon: "check" },
-  { label: "White-glove onboarding", icon: "shield" },
-];
+export const HERO_HUB_NODE = {
+  orgName: "Rivera & Co.",
+  orgSubtitle: "1 organization · 8 teammates",
+  avatarInitials: "RC",
+  statusLabel: "Synced",
+  productsActive: "2 products active",
+};
 
-export interface MeshBlobConfig {
-  className: string;
-}
+export const HERO_FUTURE_NODE = {
+  title: "Future products",
+  subtitle: "Your setup carries over",
+};
 
-export const MESH_BLOBS: MeshBlobConfig[] = [
-  {
-    className:
-      "top-[-25%] left-[-15%] h-[70vw] w-[70vw] max-h-[900px] max-w-[900px] bg-[radial-gradient(circle,rgba(121,92,245,.68)_0%,rgba(121,92,245,.22)_40%,transparent_65%)] blur-[80px] animate-[meshA_25s_ease-in-out_infinite_alternate]",
-  },
-  {
-    className:
-      "top-[10%] right-[-12%] h-[55vw] w-[55vw] max-h-[700px] max-w-[700px] bg-[radial-gradient(circle,rgba(249,92,91,.52)_0%,rgba(249,92,91,.16)_40%,transparent_65%)] blur-[90px] animate-[meshB_30s_ease-in-out_infinite_alternate]",
-  },
-  {
-    className:
-      "bottom-[-10%] left-[20%] h-[50vw] w-[50vw] max-h-[650px] max-w-[650px] bg-[radial-gradient(circle,rgba(177,30,103,.42)_0%,rgba(177,30,103,.12)_45%,transparent_65%)] blur-[100px] animate-[meshC_22s_ease-in-out_infinite_alternate]",
-  },
-  {
-    className:
-      "top-[-8%] right-[15%] h-[45vw] w-[45vw] max-h-[580px] max-w-[580px] bg-[radial-gradient(circle,rgba(155,123,247,.52)_0%,rgba(155,123,247,.14)_45%,transparent_65%)] blur-[70px] animate-[meshD_28s_ease-in-out_infinite_alternate]",
-  },
-  {
-    className:
-      "right-0 bottom-[5%] h-[40vw] w-[40vw] max-h-[500px] max-w-[500px] bg-[radial-gradient(circle,rgba(249,123,107,.42)_0%,transparent_60%)] blur-[85px] animate-[meshE_26s_ease-in-out_infinite_alternate]",
-  },
-  {
-    className:
-      "top-[30%] left-1/2 h-[50vw] w-[60vw] max-h-[600px] max-w-[800px] -translate-x-1/2 bg-[radial-gradient(ellipse,rgba(255,255,255,.7)_0%,rgba(255,255,255,.2)_40%,transparent_60%)] blur-[60px]",
-  },
-];
+export const HERO_CHIPS = {
+  pulse: "New lead → customer record",
+  inventory: "Sale → CRM history",
+};

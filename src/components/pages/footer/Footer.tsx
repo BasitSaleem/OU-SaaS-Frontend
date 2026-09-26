@@ -1,51 +1,42 @@
-import Image from "next/image";
+"use client";
+
+import { useRef } from "react";
 import Container from "@/components/Container";
 import FooterBrand from "./FooterBrand";
 import FooterColumn from "./FooterColumn";
-import FooterSocial from "./FooterSocial";
+import FooterBottomBar from "./FooterBottomBar";
+import FooterMark from "./FooterMark";
+import { useSpotlightPointer } from "@/hooks/useSpotlightPointer";
 import { FOOTER_COLUMNS } from "@/constant/navigationData";
-import footerLogo from "../../../../public/assets/footer-logo.webp";
 
-const Footer: React.FC = () => (
-  <div className="bg-white p-0 sm:p-6">
-    <footer className="relative overflow-hidden rounded-none bg-[#FAFAFA] sm:rounded-[16px]">
-      {/* Ambient Glow Ellipses */}
-      <div
-        aria-hidden
-        className="pointer-events-none absolute bottom-[-40px] left-1/2 flex -translate-x-1/2 items-center justify-center select-none"
-      >
-        <div className="h-[184px] w-[148px] rounded-full bg-[#F95C5BD4] blur-[100px]" />
-        <div className="h-[184px] w-[148px] rounded-full bg-[#795CF5] blur-[100px]" />
-      </div>
+const Footer: React.FC = () => {
+  const footerRef = useRef<HTMLElement>(null);
+  const markRef = useRef<HTMLDivElement>(null);
+  useSpotlightPointer(footerRef, markRef);
 
-      {/* Giant Background Watermark Image */}
-      <div
-        aria-hidden
-        className="pointer-events-none absolute bottom-0 left-1/2 z-0 -translate-x-1/2 select-none"
-      >
-        <Image
-          src={footerLogo}
-          alt=""
-          className="h-auto w-[min(920px,90vw)] max-w-none"
-          priority
-        />
-      </div>
-
-      <Container className="relative z-[1]">
-        <div className="grid grid-cols-1 gap-10 pt-16 pb-20 sm:grid-cols-2 md:grid-cols-[1.8fr_1fr_1fr_1fr] md:gap-12 lg:pb-28">
+  return (
+    <footer
+      ref={footerRef}
+      className="relative z-[5] -mt-7 overflow-hidden rounded-t-[28px] bg-paper pt-[clamp(72px,9vw,120px)] font-display"
+    >
+      <Container>
+        <div className="grid grid-cols-1 gap-10 md:grid-cols-[5fr_7fr] md:gap-x-16 md:gap-y-0 lg:gap-x-24">
           <FooterBrand />
-          {FOOTER_COLUMNS.map((column) => (
-            <FooterColumn key={column.title} column={column} />
-          ))}
+          <div className="grid grid-cols-2 gap-8 sm:grid-cols-3">
+            {FOOTER_COLUMNS.map((column) => (
+              <FooterColumn key={column.title} column={column} />
+            ))}
+          </div>
         </div>
 
-        <div className="flex flex-col items-center justify-between gap-4 border-t border-black/[0.06] pt-6 pb-8 text-xs text-g500 sm:flex-row sm:text-[13px]">
-          <span>&copy; 2026 Owners Universe. All rights reserved.</span>
-          <FooterSocial />
+        <div className="mt-14 sm:mt-16 md:mt-[clamp(56px,7vw,88px)]">
+          <FooterBottomBar />
         </div>
       </Container>
+
+      <FooterMark ref={markRef} />
     </footer>
-  </div>
-);
+  );
+};
 
 export default Footer;
