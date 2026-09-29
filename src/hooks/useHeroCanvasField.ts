@@ -18,10 +18,15 @@ interface Ripple {
   t: number;
 }
 
-/** Renders the dotted-grid particle field behind the hero copy, with a pointer-driven lens + ripples. */
-export function useHeroCanvasField() {
+interface HeroCanvasFieldOptions {
+  /** Cursor ripples and the dot cluster around the pointer (Home hero). Off for the lighter page-hero variant. */
+  extras?: boolean;
+}
+
+/** Renders the dotted-grid particle field behind the hero copy, with a pointer-driven lens (+ ripples when `extras`). */
+export function useHeroCanvasField<H extends HTMLElement = HTMLDivElement>({ extras = true }: HeroCanvasFieldOptions = {}) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const hostRef = useRef<HTMLDivElement>(null);
+  const hostRef = useRef<H>(null);
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -105,7 +110,7 @@ export function useHeroCanvasField() {
       ctx!.stroke();
 
       if (m.s > 0.01) {
-        for (let x = ox; x <= W; x += GAP) {
+        for (let x = ox; extras && x <= W; x += GAP) {
           for (let y = oy; y <= H; y += GAP) {
             const d = Math.hypot(x - m.x, y - m.y);
             if (d > 240) continue;
@@ -171,7 +176,7 @@ export function useHeroCanvasField() {
       if (m.lx !== null) m.travel += Math.hypot(x - m.lx, y - m.ly!);
       m.lx = x;
       m.ly = y;
-      if (m.travel > EMIT_EVERY) {
+      if (extras && m.travel > EMIT_EVERY) {
         m.travel = 0;
         if (ripples.length < 5) ripples.push({ x, y, t: performance.now() });
       }
@@ -199,7 +204,7 @@ export function useHeroCanvasField() {
       host.removeEventListener("pointerleave", onPointerLeave);
       if (raf) cancelAnimationFrame(raf);
     };
-  }, []);
+  }, [extras]);
 
   return { canvasRef, hostRef };
 }

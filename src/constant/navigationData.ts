@@ -27,14 +27,14 @@ export const PRODUCT_NAV_ITEMS: ProductNavItem[] = [
   {
     key: "pulse",
     name: "Owners Pulse",
-    href: "https://ownerspulse.com",
+    href: "/products#owners-pulse",
     category: "Marketing Automation for Home Services",
     tags: ["Automated Review Engine", "Smart Booking & CRM", "Done-for-You Marketing Services"],
   },
   {
     key: "inventory",
     name: "Owners Inventory",
-    href: "https://ownersinventory.com",
+    href: "/products#owners-inventory",
     category: "POS & Operations Management for Retail",
     tags: ["Point of Sale (POS)", "Real-Time Inventory Tracking", "HR, Finance & Reporting", "Multi-Location Support"],
   },

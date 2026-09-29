@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import type { ProductNavItem } from "@/constant/navigationData";
 import { PRODUCT_LOGOS } from "@/constant/productLogos";
 
@@ -10,10 +11,8 @@ const ArrowUpRightIcon = () => (
 );
 
 const ProductsMenuItem: React.FC<{ product: ProductNavItem }> = ({ product }) => (
-  <a
+  <Link
     href={product.href}
-    target="_blank"
-    rel="noopener noreferrer"
     className="group flex flex-col gap-2.5 rounded-2xl bg-paper p-4 pb-3.5 transition-colors duration-150 hover:bg-paper-2"
   >
     <span className="flex items-center justify-between">
@@ -31,7 +30,7 @@ const ProductsMenuItem: React.FC<{ product: ProductNavItem }> = ({ product }) =>
         </span>
       )}
     </span>
-  </a>
+  </Link>
 );
 
 export default ProductsMenuItem;

@@ -45,6 +45,7 @@ export interface AboutStatItem {
   count: number;
   suffix?: string;
   label: string;
+  note?: string;
 }
 
 export const ABOUT_STATS_TITLE = "By the Numbers";
@@ -52,13 +53,15 @@ export const ABOUT_STATS: AboutStatItem[] = [
   { count: 80, suffix: "+", label: "Team Members" },
   { count: 2, label: "Products Live" },
   { count: 3, suffix: "+", label: "Years Building" },
-  { count: 2, label: "Industries Served" },
+  { count: 2, label: "Industries Served", note: "Home Services + Retail" },
 ];
 
 export const ABOUT_LOCATION_TITLE = "Where We're Based";
 export const ABOUT_LOCATION_DESC =
   "Owners Universe is headquartered with a team that operates across US time zones, ensuring support and service are always available during business hours.";
 export const ABOUT_LOCATION_NAME = "Owners Universe";
+export const ABOUT_LOCATION_ADDRESS_STRING =
+  "Owners Universe, 4254 Normandy Ct, Fredericksburg, VA 22408, United States";
 export const ABOUT_LOCATION_LINES: string[] = [
   "4254 Normandy Ct",
   "Fredericksburg, VA 22408",

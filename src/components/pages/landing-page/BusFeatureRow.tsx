@@ -8,7 +8,7 @@ const BusFeatureRow: React.FC<{ row: BusFeatureRowData }> = ({ row }) => (
     <BusLabel icon={row.icon} title={row.title} />
     <BusCellNode />
     <BusCellNode />
-    <BusCellNext rowIndex={row.rowIndex} />
+    <BusCellNext />
   </>
 );
 

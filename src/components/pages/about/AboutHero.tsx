@@ -1,30 +1,33 @@
-import Link from "next/link";
-import Container from "@/components/Container";
-import MainHeading from "@/components/pages/typography/MainHeading";
-import Paragraph from "@/components/pages/typography/Paragraph";
-import { ABOUT_HERO_SUB, ABOUT_HERO_TITLE } from "@/constant/aboutData";
+import PageHeroField from "@/components/common-components/PageHeroField";
+import Breadcrumbs from "@/components/common-components/Breadcrumbs";
+import HoverWord from "@/components/common-components/HoverWord";
+import { CONTAINER } from "@/styles/sectionClasses";
+import { ABOUT_HERO_SUB } from "@/constant/aboutData";
+
+const INTRO = "animate-[intro_1000ms_var(--ease-out)_both]";
+
+const CRUMBS = [
+  { label: "Home", href: "/" },
+  { label: "About" },
+];
 
 const AboutHero: React.FC = () => (
-  <section className="border-b border-g200 pt-[calc(var(--nav-h)+60px)] pb-[60px]">
-    <Container>
-      <div className="mb-5 text-[13px] text-g400">
-        <Link href="/" className="text-g400 transition-colors duration-200 hover:text-purple">
-          Home
-        </Link>
-        <span className="mx-1.5 text-g300">/</span>
-        <span>About</span>
-      </div>
-      <MainHeading
-        as="h1"
-        className="mb-3.5 !text-[36px] md:!text-[48px] lg:!text-[64px] !font-semibold !tracking-[-0.03em]"
+  <PageHeroField id="about" labelledBy="ahero-title">
+    <div className={`${CONTAINER} relative z-1 flex flex-col items-center text-center`}>
+      <Breadcrumbs items={CRUMBS} className={`${INTRO} [animation-delay:60ms]`} />
+      <h1
+        id="ahero-title"
+        className={`${INTRO} mt-5 max-w-[14em] text-[clamp(42px,6.2vw,88px)] font-semibold leading-[1.02] tracking-[-0.05em] text-ink [text-wrap:balance] [animation-delay:180ms]`}
       >
-        {ABOUT_HERO_TITLE}
-      </MainHeading>
-      <Paragraph className="max-w-[520px] !text-[length:clamp(17px,1.4vw,20px)] lg:!text-[length:clamp(17px,1.4vw,20px)] !leading-[1.5] !text-g500">
+        About Owners <HoverWord>Universe</HoverWord>
+      </h1>
+      <p
+        className={`${INTRO} mt-6 max-w-[22em] text-[clamp(22px,2.4vw,32px)] font-medium leading-[1.3] tracking-[-0.035em] text-[#4a4a47] [text-wrap:pretty] [animation-delay:300ms]`}
+      >
         {ABOUT_HERO_SUB}
-      </Paragraph>
-    </Container>
-  </section>
+      </p>
+    </div>
+  </PageHeroField>
 );
 
 export default AboutHero;

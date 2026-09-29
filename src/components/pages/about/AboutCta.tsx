@@ -1,11 +1,6 @@
-"use client";
-
-import { useRef } from "react";
-import Container from "@/components/Container";
-import MainHeading from "@/components/pages/typography/MainHeading";
-import Paragraph from "@/components/pages/typography/Paragraph";
-import ButtonPrimary from "@/components/button/ButtonPrimary";
-import { useScrollReveal } from "@/hooks/useScrollReveal";
+import Reveal from "@/components/common-components/Reveal";
+import ButtonInkPill from "@/components/button/ButtonInkPill";
+import { CONTAINER } from "@/styles/sectionClasses";
 import {
   ABOUT_CTA_BUTTON_HREF,
   ABOUT_CTA_BUTTON_TEXT,
@@ -13,29 +8,34 @@ import {
   ABOUT_CTA_TITLE,
 } from "@/constant/aboutData";
 
-const AboutCta: React.FC = () => {
-  const sectionRef = useRef<HTMLDivElement>(null);
-  const reveal = useScrollReveal(sectionRef);
+const AboutCta: React.FC = () => (
+  <section
+    aria-labelledby="acta-title"
+    className="pb-[clamp(120px,13vw,170px)]"
+  >
+    <div className={CONTAINER}>
+      <Reveal>
+        {/* Card: horizontal flex → column on mobile */}
+        <div className="flex flex-wrap items-center justify-between gap-8 rounded-[var(--r-xl)] border border-line bg-white p-[clamp(32px,5vw,64px)] [background-image:radial-gradient(420px_circle_at_100%_0%,rgba(121,92,245,0.08),transparent_70%),radial-gradient(360px_circle_at_0%_100%,rgba(249,92,91,0.07),transparent_70%)] max-[560px]:flex-col max-[560px]:items-start">
+          <div className="flex flex-col gap-[14px]">
+            <h2
+              id="acta-title"
+              className="text-[clamp(32px,4vw,56px)] font-semibold leading-[1.05] tracking-[-0.04em] text-ink [text-wrap:balance]"
+            >
+              {ABOUT_CTA_TITLE}
+            </h2>
+            <p className="text-[clamp(18px,1.8vw,24px)] leading-[1.45] tracking-[-0.02em] text-neutral [text-wrap:pretty]">
+              {ABOUT_CTA_SUB}
+            </p>
+          </div>
 
-  return (
-    <section className="border-t border-g200 py-[60px] text-center">
-      <Container>
-        <div ref={sectionRef} style={reveal.style} className={reveal.className}>
-          <MainHeading as="h2" className="mb-2.5 !text-[32px] md:!text-[36px] lg:!text-[48px] !font-semibold !tracking-[-0.02em]">
-            {ABOUT_CTA_TITLE}
-          </MainHeading>
-          <Paragraph className="mb-6 !text-[15px] lg:!text-[15px] !text-g500">
-            {ABOUT_CTA_SUB}
-          </Paragraph>
-          <ButtonPrimary
-            text={ABOUT_CTA_BUTTON_TEXT}
-            href={ABOUT_CTA_BUTTON_HREF}
-            magnetic
-          />
+          <ButtonInkPill href={ABOUT_CTA_BUTTON_HREF} variant="primary" size="lg">
+            {ABOUT_CTA_BUTTON_TEXT}
+          </ButtonInkPill>
         </div>
-      </Container>
-    </section>
-  );
-};
+      </Reveal>
+    </div>
+  </section>
+);
 
 export default AboutCta;

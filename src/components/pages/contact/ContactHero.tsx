@@ -1,43 +1,33 @@
-"use client";
+import PageHeroField from "@/components/common-components/PageHeroField";
+import Breadcrumbs from "@/components/common-components/Breadcrumbs";
+import HoverWord from "@/components/common-components/HoverWord";
+import { CONTAINER } from "@/styles/sectionClasses";
+import { CONTACT_HERO_SUB } from "@/constant/contactData";
 
-import { useRef } from "react";
-import Container from "@/components/Container";
-import Eyebrow from "@/components/Eyebrow";
-import MainHeading from "@/components/pages/typography/MainHeading";
-import Paragraph from "@/components/pages/typography/Paragraph";
-import { useScrollReveal } from "@/hooks/useScrollReveal";
-import { CONTACT_HERO_SUB, CONTACT_HERO_TITLE } from "@/constant/contactData";
+const INTRO = "animate-[intro_1000ms_var(--ease-out)_both]";
 
-const ContactHero: React.FC = () => {
-  const eyebrowRef = useRef<HTMLDivElement>(null);
-  const titleRef = useRef<HTMLHeadingElement>(null);
-  const subRef = useRef<HTMLParagraphElement>(null);
-  const eyebrow = useScrollReveal(eyebrowRef);
-  const title = useScrollReveal(titleRef, 80);
-  const sub = useScrollReveal(subRef, 160);
+const CRUMBS = [
+  { label: "Home", href: "/" },
+  { label: "Contact" },
+];
 
-  return (
-    <section className="pt-[calc(var(--nav-h)+60px)] pb-[60px]">
-      <Container>
-        <Eyebrow ref={eyebrowRef} style={eyebrow.style} text="Contact" className={`${eyebrow.className} mb-[22px]`} />
-        <MainHeading
-          as="h1"
-          ref={titleRef}
-          style={title.style}
-          className={`${title.className} mb-5 max-w-[14ch] !text-[36px] md:!text-[48px] lg:!text-[64px] !leading-[0.98] !font-bold !tracking-[-0.035em]`}
-        >
-          {CONTACT_HERO_TITLE}
-        </MainHeading>
-        <Paragraph
-          ref={subRef}
-          style={sub.style}
-          className={`${sub.className} max-w-[480px] !text-[length:clamp(15px,1.2vw,17px)] lg:!text-[length:clamp(15px,1.2vw,17px)] !leading-[1.6] !text-g500`}
-        >
-          {CONTACT_HERO_SUB}
-        </Paragraph>
-      </Container>
-    </section>
-  );
-};
+const ContactHero: React.FC = () => (
+  <PageHeroField id="contact" labelledBy="chero-title">
+    <div className={`${CONTAINER} relative z-1 flex flex-col items-center text-center`}>
+      <Breadcrumbs items={CRUMBS} className={`${INTRO} [animation-delay:60ms]`} />
+      <h1
+        id="chero-title"
+        className={`${INTRO} mt-5 max-w-[14em] text-[clamp(42px,6.2vw,88px)] font-semibold leading-[1.02] tracking-[-0.05em] text-ink [text-wrap:balance] [animation-delay:180ms]`}
+      >
+        Contact <HoverWord>Us</HoverWord>
+      </h1>
+      <p
+        className={`${INTRO} mt-6 max-w-[28em] text-[clamp(20px,2.2vw,28px)] font-medium leading-[1.35] tracking-[-0.03em] text-[#4a4a47] [text-wrap:pretty] [animation-delay:300ms]`}
+      >
+        {CONTACT_HERO_SUB}
+      </p>
+    </div>
+  </PageHeroField>
+);
 
 export default ContactHero;

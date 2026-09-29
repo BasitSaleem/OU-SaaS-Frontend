@@ -46,7 +46,7 @@ const ProductsNavItem: React.FC<ProductsNavItemProps> = ({ linkClassName, onPoin
         onMouseEnter={(e) => onPointerEnter(e.currentTarget)}
         onFocus={(e) => onPointerEnter(e.currentTarget)}
         onClick={() => setMenu(!open)}
-        className={clsx("inline-flex items-center gap-[5px]", linkClassName, open && "text-ink")}
+        className={clsx("inline-flex items-center gap-[5px]", linkClassName)}
       >
         Products
         <svg

@@ -5,8 +5,8 @@ import LegalContentSection from "@/components/pages/legal/LegalContentSection";
 import { PRIVACY_SECTIONS, PRIVACY_SECTION_IDS, PRIVACY_CONTENT } from "@/constant/legal/privacyData";
 
 const Page = () => (
-  <>
-    <LegalHero title="Privacy Policy" updatedDate="[Date]" />
+  <main className="min-h-screen bg-paper">
+    <LegalHero title="Privacy Policy" updatedDate="September 2026" />
     <LegalLayout nav={<LegalNav sections={PRIVACY_SECTIONS} sectionIds={PRIVACY_SECTION_IDS} />}>
       {PRIVACY_SECTIONS.map((section, i) => (
         <LegalContentSection
@@ -15,10 +15,11 @@ const Page = () => (
           number={i + 1}
           title={section.label}
           blocks={PRIVACY_CONTENT[section.id]}
+          isFirst={i === 0}
         />
       ))}
     </LegalLayout>
-  </>
+  </main>
 );
 
 export default Page;

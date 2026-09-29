@@ -1,19 +1,17 @@
-import PageMesh from "@/components/PageMesh";
 import ProductsHero from "@/components/pages/products/ProductsHero";
-import ProductsShowcase from "@/components/pages/products/ProductsShowcase";
-import WhyTwoProducts from "@/components/pages/products/WhyTwoProducts";
-import ComingSoonSection from "@/components/pages/products/ComingSoonSection";
-import ProductsClosingCta from "@/components/pages/products/ProductsClosingCta";
+import ProductSection from "@/components/pages/products/ProductSection";
+import ComingSoon from "@/components/pages/products/ComingSoon";
+import WhySeparate from "@/components/pages/products/WhySeparate";
+import { INVENTORY_SECTION, PULSE_SECTION } from "@/constant/productsPageData";
 
 const Page = () => (
-  <>
-    <PageMesh />
+  <main id="main" className="overflow-x-clip bg-paper font-display">
     <ProductsHero />
-    <ProductsShowcase />
-    <WhyTwoProducts />
-    <ComingSoonSection />
-    <ProductsClosingCta />
-  </>
+    <ProductSection product={PULSE_SECTION} />
+    <ProductSection product={INVENTORY_SECTION} flip className="pt-[clamp(120px,14vw,180px)]!" />
+    <WhySeparate />
+    <ComingSoon />
+  </main>
 );
 
 export default Page;

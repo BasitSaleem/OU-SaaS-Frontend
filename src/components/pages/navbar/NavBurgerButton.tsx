@@ -12,7 +12,7 @@ const NavBurgerButton: React.FC<NavBurgerButtonProps> = ({ open, onClick }) => (
     aria-expanded={open}
     aria-controls="mobile-menu"
     onClick={onClick}
-    className="inline-flex h-10 w-10 items-center justify-center rounded-full transition-colors duration-150 hover:bg-black/5 nav:hidden"
+    className="inline-flex h-10 w-10 items-center justify-center rounded-full transition-colors duration-150 hover:bg-black/5 min-[761px]:hidden"
   >
     <span className="relative h-2.5 w-[18px]" aria-hidden>
       <i

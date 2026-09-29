@@ -1,0 +1,44 @@
+:root {
+  /* Palette — restrained: charcoal, warm paper, one strategic red */
+  --ink: #0b0b0b;
+  --ink-2: #1a1a1a;
+  --ink-3: #2a2a2a;
+  --paper: #f7f7f5;
+  --paper-2: #efefec;
+  --white: #ffffff;
+  --neutral: #6b6b6b;
+  --neutral-2: #9a9a97;
+  --line: #e4e4e0;
+  --line-dark: #262626;
+  --red: #f95c5b; /* Owners Universe coral, from the OU logo */
+  --red-press: #e84a49;
+
+  /* Product identity (sampled from the official logos, used as tiny accents only) */
+  --pulse: #f95c5b;
+  --inventory: #795cf5;
+
+  /* Type */
+  --font: 'Geist', 'Inter', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --mono: 'Geist Mono', ui-monospace, 'SF Mono', Menlo, monospace;
+
+  /* Layout */
+  --max: 1240px;
+  --gutter: clamp(20px, 5vw, 80px);
+  --section: clamp(96px, 14vw, 180px);
+
+  /* Radius & depth */
+  --r-sm: 8px;
+  --r-md: 12px;
+  --r-lg: 20px;
+  --r-xl: 28px;
+  --shadow-1: 0 1px 2px rgb(11 11 11 / 0.04), 0 1px 1px rgb(11 11 11 / 0.03);
+  --shadow-2: 0 2px 4px rgb(11 11 11 / 0.04), 0 12px 32px -8px rgb(11 11 11 / 0.10);
+  --shadow-3: 0 4px 8px rgb(11 11 11 / 0.04), 0 32px 80px -24px rgb(11 11 11 / 0.22);
+
+  /* Motion */
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+  --fast: 180ms;
+  --med: 420ms;
+  --slow: 900ms;
+}

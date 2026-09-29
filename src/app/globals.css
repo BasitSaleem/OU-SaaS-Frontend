@@ -150,3 +150,18 @@ body {
 @keyframes stage-in { from { opacity: 0; } to { opacity: 1; } }
 
 
+
+@keyframes nav-in { from { opacity: 0; transform: translateY(24px); filter: blur(6px); } to { opacity: 1; transform: none; filter: none; } }
+@keyframes dot-morph {
+  0%, 6% { width: 5px; height: 5px; border-radius: 50%; background: var(--red); transform: translate(-50%, 0) rotate(0deg); }
+  14% { width: 5px; height: 5px; border-radius: 50%; background: var(--red); transform: translate(calc(-50% - 9px), 0) rotate(0deg); }
+  24%, 30% { width: 20px; height: 3px; border-radius: 3px; background: var(--red); transform: translate(-50%, -1px) rotate(0deg); }
+  38% { width: 5px; height: 5px; border-radius: 50%; background: var(--red); transform: translate(calc(-50% + 9px), 0) rotate(0deg); }
+  44% { width: 5px; height: 5px; border-radius: 50%; background: var(--red); transform: translate(calc(-50% + 4px), -6px) rotate(0deg); }
+  50% { width: 5px; height: 5px; border-radius: 50%; background: var(--red); transform: translate(-50%, 0) rotate(0deg); }
+  58%, 64% { width: 5px; height: 5px; border-radius: 1.5px; background: var(--inventory); transform: translate(-50%, -4px) rotate(225deg); }
+  72% { width: 5px; height: 5px; border-radius: 50%; background: var(--red); transform: translate(-50%, 1px) rotate(360deg); }
+  78%, 100% { width: 5px; height: 5px; border-radius: 50%; background: var(--red); transform: translate(-50%, 0) rotate(360deg); }
+}
+@keyframes go-nudge { 0% { transform: none; } 45% { transform: translateY(4px); } 100% { transform: none; } }
+@keyframes pin-hop { 0% { transform: none; } 40% { transform: translateY(-5px); } 100% { transform: none; } }

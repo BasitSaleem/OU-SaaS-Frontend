@@ -11,13 +11,13 @@ export const TERMS_SECTIONS: LegalSection[] = [
   { id: "data-privacy", label: "Data and Privacy" },
   { id: "done-for-you", label: "Done-for-You Services" },
   { id: "third-party", label: "Third-Party Services" },
-  { id: "service-availability", label: "Service Availability" },
-  { id: "limitation-liability", label: "Limitation of Liability" },
+  { id: "availability", label: "Service Availability" },
+  { id: "liability", label: "Limitation of Liability" },
   { id: "indemnification", label: "Indemnification" },
-  { id: "dispute-resolution", label: "Dispute Resolution" },
+  { id: "disputes", label: "Dispute Resolution" },
   { id: "modifications", label: "Modifications to Terms" },
   { id: "termination", label: "Termination" },
-  { id: "general-provisions", label: "General Provisions" },
+  { id: "general", label: "General Provisions" },
   { id: "contact-us", label: "Contact Us" },
 ];
 
@@ -30,7 +30,7 @@ export const TERMS_CONTENT: Record<string, LegalSectionContent> = {
       {
         type: "p",
         content: [
-          'By accessing or using any Owners Universe service — including ownersuniverse.com, ownerspulse.com, ownersinventory.com, and their associated applications (collectively, "Services") — you agree to be bound by these Terms of Service ("Terms"). If you do not agree, do not use our Services.',
+          'By accessing or using any Owners Universe service, including ownersuniverse.com, ownerspulse.com, ownersinventory.com, and their associated applications (collectively, "Services"), you agree to be bound by these Terms of Service ("Terms"). If you do not agree, do not use our Services.',
         ],
       },
       {
@@ -192,7 +192,7 @@ export const TERMS_CONTENT: Record<string, LegalSectionContent> = {
         content: [
           "Your use of our Services is also governed by our ",
           { text: "Privacy Policy", href: "/privacy" },
-          " (ownersuniverse.com/privacy). By using our Services, you consent to the collection and use of information as described in the Privacy Policy.",
+          ". By using our Services, you consent to the collection and use of information as described in the Privacy Policy.",
         ],
       },
     ],
@@ -242,7 +242,7 @@ export const TERMS_CONTENT: Record<string, LegalSectionContent> = {
     ],
   },
 
-  "service-availability": {
+  availability: {
     title: "Service Availability",
     blocks: [
       {
@@ -254,7 +254,7 @@ export const TERMS_CONTENT: Record<string, LegalSectionContent> = {
     ],
   },
 
-  "limitation-liability": {
+  liability: {
     title: "Limitation of Liability",
     blocks: [
       { type: "p", content: ["TO THE MAXIMUM EXTENT PERMITTED BY LAW:"] },
@@ -281,7 +281,7 @@ export const TERMS_CONTENT: Record<string, LegalSectionContent> = {
     ],
   },
 
-  "dispute-resolution": {
+  disputes: {
     title: "Dispute Resolution",
     blocks: [
       { type: "h3", text: "13.1 Governing Law" },
@@ -338,7 +338,7 @@ export const TERMS_CONTENT: Record<string, LegalSectionContent> = {
     ],
   },
 
-  "general-provisions": {
+  general: {
     title: "General Provisions",
     blocks: [
       {

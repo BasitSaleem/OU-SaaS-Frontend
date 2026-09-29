@@ -7,7 +7,6 @@ import Logo from "./Logo";
 import NavPrimaryLinks from "./NavPrimaryLinks";
 import NavLoginLink from "./NavLoginLink";
 import NavBurgerButton from "./NavBurgerButton";
-import NavProgressBar from "./NavProgressBar";
 import MobileMenu from "./MobileMenu";
 import { useNavScrollState } from "@/hooks/useNavScrollState";
 
@@ -15,7 +14,7 @@ const Navbar: React.FC = () => {
   const pathname = usePathname();
   const [mobileOpen, setMobileOpen] = useState(false);
   const [lastPathname, setLastPathname] = useState(pathname);
-  const { scrolled, hidden, progress } = useNavScrollState(mobileOpen);
+  const { scrolled, hidden } = useNavScrollState(mobileOpen);
   const barActive = scrolled || mobileOpen;
 
   if (pathname !== lastPathname) {
@@ -33,19 +32,19 @@ const Navbar: React.FC = () => {
   return (
     <header
       className={clsx(
-        "fixed inset-x-0 top-0 z-50 px-[clamp(20px,5vw,80px)] pt-3 pb-3 font-display transition-transform duration-500 ease-[var(--ease)]",
+        "pointer-events-none fixed inset-x-0 top-0 z-50 px-[var(--gutter)] pt-[calc(12px+env(safe-area-inset-top,0px))] pb-3 font-display transition-transform duration-[600ms] ease-[var(--ease-out)]",
         hidden && "-translate-y-[calc(100%+12px)]"
       )}
     >
       <div
         className={clsx(
-          "relative mx-auto grid h-16 max-w-[1240px] grid-cols-[1fr_auto_1fr] items-center gap-4 rounded-full border border-transparent pr-2.5 pl-4 transition-[background-color,border-color,box-shadow,max-width,height] duration-500 ease-[var(--ease)]",
-          "max-nav:flex max-nav:h-[58px] max-nav:justify-between max-nav:pl-3",
-          barActive &&
-            "max-w-[880px] h-[60px] border-black/[0.07] bg-[#fcfcfb]/[0.78] shadow-[inset_0_1px_0_rgba(255,255,255,0.9),0_1px_2px_rgba(11,11,11,0.04),0_18px_40px_-22px_rgba(11,11,11,0.35)] backdrop-blur-2xl backdrop-saturate-[1.8]"
+          "pointer-events-auto relative mx-auto grid animate-[nav-in_1000ms_var(--ease-out)_150ms_both] grid-cols-[1fr_auto_1fr] items-center gap-4 rounded-full border pr-3 pl-5 transition-[background-color,border-color,box-shadow,backdrop-filter,max-width,height] duration-500 ease-[var(--ease-out)] max-[760px]:flex max-[760px]:justify-between max-[760px]:pl-3.5",
+          barActive
+            ? "h-[68px] max-w-[1040px] border-white/60 bg-white/[0.42] backdrop-blur-[22px] backdrop-saturate-[1.8] [box-shadow:inset_0_1px_0_rgba(255,255,255,0.75),0_12px_40px_-10px_rgba(11,11,11,0.2)]"
+            : "h-[76px] max-w-[var(--max)] border-transparent bg-transparent max-[760px]:h-16"
         )}
       >
-        <Logo imgHeight={scrolled ? 40 : 44} className="justify-self-start" />
+        <Logo imgHeight={scrolled ? 44 : 48} className="justify-self-start rounded-[10px] transition-opacity duration-[180ms] hover:opacity-80 max-[760px]:[&_img]:!h-10" />
 
         <NavPrimaryLinks />
 
@@ -53,8 +52,6 @@ const Navbar: React.FC = () => {
           <NavLoginLink />
           <NavBurgerButton open={mobileOpen} onClick={() => setMobileOpen((v) => !v)} />
         </div>
-
-        <NavProgressBar progress={progress} visible={scrolled} />
       </div>
 
       <MobileMenu isOpen={mobileOpen} onLinkClick={() => setMobileOpen(false)} />

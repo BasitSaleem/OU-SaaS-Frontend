@@ -1,4 +1,4 @@
-import Container from "@/components/Container";
+import { CONTAINER } from "@/styles/sectionClasses";
 
 interface LegalLayoutProps {
   nav: React.ReactNode;
@@ -6,10 +6,12 @@ interface LegalLayoutProps {
 }
 
 const LegalLayout: React.FC<LegalLayoutProps> = ({ nav, children }) => (
-  <Container className="grid grid-cols-[220px_1fr] items-start gap-[clamp(40px,6vw,96px)] py-14 pb-[120px] max-[900px]:grid-cols-1">
-    {nav}
-    <div className="max-w-[720px]">{children}</div>
-  </Container>
+  <section className="pb-[clamp(96px,14vw,180px)] bg-paper">
+    <div className={`${CONTAINER} grid grid-cols-[248px_minmax(0,720px)] justify-center gap-[clamp(48px,7vw,112px)] pt-[clamp(40px,5vw,64px)] border-t border-[#e4e4e0] max-[960px]:grid-cols-1 max-[960px]:gap-10`}>
+      <aside className="relative">{nav}</aside>
+      <article className="max-w-[720px] text-[16px] leading-[1.7] text-[#3a3a38]">{children}</article>
+    </div>
+  </section>
 );
 
 export default LegalLayout;
