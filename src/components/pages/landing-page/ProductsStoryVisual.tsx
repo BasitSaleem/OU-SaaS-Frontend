@@ -15,7 +15,7 @@ const PHOTO_BASE =
 const ProductsStoryVisual: React.FC<{ activeIndex: number }> = ({ activeIndex }) => (
   <div aria-hidden className="sticky top-0 flex h-screen items-center max-[900px]:hidden">
     <div className="relative w-full">
-      <div className="mb-4.5 flex gap-6 font-mono text-xs tracking-[0.08em] text-neutral-2 uppercase">
+      <div className="mb-4.5 flex gap-6 text-sm font-medium text-neutral-2">
         <span className={clsx(RAIL_ITEM, activeIndex === 0 ? "text-ink after:scale-x-100" : "after:scale-x-0")}>Owners Pulse</span>
         <span className={clsx(RAIL_ITEM, activeIndex === 1 ? "text-ink after:scale-x-100" : "after:scale-x-0")}>Owners Inventory</span>
       </div>

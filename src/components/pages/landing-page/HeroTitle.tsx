@@ -14,7 +14,7 @@ const HeroTitle: React.FC = () => {
         Business{" "}
         <span
           ref={hoverwordRef}
-          className="[--mx:50%] [--my:50%] pb-[0.06em] text-transparent [-webkit-background-clip:text] [background-clip:text] [background-image:radial-gradient(circle_var(--spot)_at_var(--mx)_var(--my),#f95c5b_0%,#c85a9c_30%,#7a5cf5_62%,rgba(122,92,245,0)_100%),linear-gradient(var(--ink),var(--ink))] [transition:--spot_600ms_var(--ease-out)]"
+          className="hoverword [--mx:50%] [--my:50%] px-[0.12em] -mx-[0.12em] pt-[0.04em] pb-[0.1em] -my-[0.04em] -mb-[0.1em] text-transparent [-webkit-background-clip:text] [background-clip:text] [background-image:radial-gradient(circle_var(--spot)_at_var(--mx)_var(--my),#f95c5b_0%,#c85a9c_30%,#7a5cf5_62%,rgba(122,92,245,0)_100%),linear-gradient(var(--ink),var(--ink))] [transition:--spot_600ms_var(--ease-out)] [-webkit-box-decoration-break:clone] [box-decoration-break:clone]"
         >
           Software
         </span>

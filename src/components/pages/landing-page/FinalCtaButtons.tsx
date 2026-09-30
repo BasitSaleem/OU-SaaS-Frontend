@@ -14,7 +14,7 @@ const FinalCtaButtons: React.FC<{ isIn: boolean }> = ({ isIn }) => (
     <ButtonInkPill href="https://app.ownersuniverse.com" target="_blank" variant="light-ghost" size="lg">
       Log in to dashboard
     </ButtonInkPill>
-    <p className="mt-2 inline-flex basis-full items-center gap-2.5 font-mono text-xs tracking-[0.08em] text-[#8a8a87] uppercase">
+    <p className="mt-2 inline-flex basis-full items-center gap-2.5 text-sm font-medium text-[#a3a3a0]">
       <span className="h-1.5 w-1.5 rounded-full bg-coral" aria-hidden />
       One account. All products. No contracts.
     </p>

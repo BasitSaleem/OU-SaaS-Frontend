@@ -8,7 +8,7 @@ import { useThroughScrollProgress } from "@/hooks/useThroughScrollProgress";
 import { BUS_FEATURE_ROWS } from "@/constant/whyData";
 
 const LABEL_HEAD_FOOT =
-  "font-mono text-[11px] tracking-[0.1em] text-[#6b6b6b] uppercase max-[640px]:text-[9.5px] max-[640px]:tracking-[0.06em]";
+  "text-[13px] font-medium text-[#8a8a87] max-[640px]:text-[11px]";
 
 const BusDiagram: React.FC = () => {
   const ref = useThroughScrollProgress<HTMLDivElement>();

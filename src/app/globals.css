@@ -145,6 +145,9 @@ body {
    class name — Tailwind's `animate-[name_...]` utilities just reference them by name.
    ========================================================= */
 @property --spot { syntax: '<length>'; inherits: false; initial-value: 0px; }
+@property --sx { syntax: '<percentage>'; inherits: false; initial-value: 4%; }
+@keyframes hw-sweep { 0% { --sx: 4%; --spot: 0px; } 18% { --spot: clamp(90px, 11vw, 170px); } 72% { --spot: clamp(90px, 11vw, 170px); } 100% { --sx: 96%; --spot: 0px; } }
+.is-sweep { --mx: var(--sx); --my: 55%; animation: hw-sweep 1900ms cubic-bezier(0.65, 0, 0.35, 1) both; }
 @keyframes intro { from { opacity: 0; transform: translateY(18px); filter: blur(6px); } to { opacity: 1; transform: none; filter: none; } }
 @keyframes cue { 0% { transform: scaleY(0); } 50% { transform: scaleY(1); transform-origin: top; } 51% { transform-origin: bottom; } 100% { transform: scaleY(0); transform-origin: bottom; } }
 @keyframes stage-in { from { opacity: 0; } to { opacity: 1; } }

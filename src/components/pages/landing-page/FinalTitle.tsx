@@ -18,10 +18,6 @@ const FinalTitle: React.FC<{ isIn: boolean }> = ({ isIn }) => (
     <span className="block overflow-hidden pb-[0.1em] -mb-[0.1em]">
       <span className={clsx(LINE_SPAN, "delay-[120ms]", isIn ? "translate-y-0" : "translate-y-[105%]")}>
         you are.
-        <span
-          aria-hidden
-          className="ml-[0.06em] inline-block h-[0.16em] w-[0.16em] rounded-full bg-coral [box-shadow:0_0_0_calc(var(--d)*0.08em)_rgba(249,92,91,0.18)]"
-        />
       </span>
     </span>
   </h2>
