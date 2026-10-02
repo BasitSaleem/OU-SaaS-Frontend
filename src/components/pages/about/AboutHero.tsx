@@ -1,7 +1,7 @@
 import PageHeroField from "@/components/common-components/PageHeroField";
 import Breadcrumbs from "@/components/common-components/Breadcrumbs";
 import HoverWord from "@/components/common-components/HoverWord";
-import { CONTAINER } from "@/styles/sectionClasses";
+import { CONTAINER, HERO_H1_SIZE } from "@/styles/sectionClasses";
 import { ABOUT_HERO_SUB } from "@/constant/aboutData";
 
 const INTRO = "animate-[intro_1000ms_var(--ease-out)_both]";
@@ -17,7 +17,7 @@ const AboutHero: React.FC = () => (
       <Breadcrumbs items={CRUMBS} className={`${INTRO} [animation-delay:60ms]`} />
       <h1
         id="ahero-title"
-        className={`${INTRO} mt-5 max-w-[14em] text-[clamp(42px,6.2vw,88px)] font-semibold leading-[1.02] tracking-[-0.05em] text-ink [text-wrap:balance] [animation-delay:180ms]`}
+        className={`${INTRO} mt-5 max-w-[14em] ${HERO_H1_SIZE} font-semibold leading-[1.02] tracking-[-0.05em] text-ink [text-wrap:balance] [animation-delay:180ms]`}
       >
         About Owners <HoverWord>Universe</HoverWord>
       </h1>

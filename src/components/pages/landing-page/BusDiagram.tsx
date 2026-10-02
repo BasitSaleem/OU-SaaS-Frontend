@@ -27,8 +27,8 @@ const BusDiagram: React.FC = () => {
         <BusProductTile productKey="inventory" logoHeight={25} />
         <BusTileNext />
 
-        {BUS_FEATURE_ROWS.map((row) => (
-          <BusFeatureRow key={row.title} row={row} />
+        {BUS_FEATURE_ROWS.map((row, index) => (
+          <BusFeatureRow key={row.title} row={row} index={index} />
         ))}
 
         <div className={`mt-8 ${LABEL_HEAD_FOOT}`}>Foundation</div>

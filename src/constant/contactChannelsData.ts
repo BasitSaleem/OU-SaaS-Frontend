@@ -1,6 +1,5 @@
 import type { StaticImageData } from "next/image";
-import pulseIcon from "../../public/assets/products/owners-pulse-icon.png";
-import inventoryIcon from "../../public/assets/products/owners-inventory-icon.png";
+import { PRODUCT_LOGOS } from "./productLogos";
 
 export const SUPPORT_SECTION_TITLE = "Or go straight to the right team.";
 export const SUPPORT_SECTION_SUB =
@@ -34,7 +33,7 @@ export const SUPPORT_CHANNELS: SupportChannel[] = [
     id: "pulse",
     title: "Owners Pulse",
     desc: "CRM, review automation, booking, marketing services, or billing.",
-    iconSrc: pulseIcon,
+    iconSrc: PRODUCT_LOGOS.pulse,
     rows: [
       { icon: "mail", text: "support@ownerspulse.com", href: "mailto:support@ownerspulse.com" },
       { icon: "phone", text: "(540) 559-2908" },
@@ -45,7 +44,7 @@ export const SUPPORT_CHANNELS: SupportChannel[] = [
     id: "inventory",
     title: "Owners Inventory",
     desc: "POS, inventory, HR, billing, or technical issues.",
-    iconSrc: inventoryIcon,
+    iconSrc: PRODUCT_LOGOS.inventory,
     rows: [{ icon: "mail", text: "support@ownersinventory.com", href: "mailto:support@ownersinventory.com" }],
     cta: { text: "Visit Owners Inventory", href: "https://ownersinventory.com/contact" },
   },

@@ -1,7 +1,7 @@
 import { HERO_CHIPS } from "@/constant/heroData";
 
 const CHIP_BASE =
-  "absolute top-[calc(356*var(--u))] whitespace-nowrap rounded-full bg-ink font-mono tracking-[0.01em] text-paper [box-shadow:0_calc(10*var(--u))_calc(24*var(--u))_calc(-10*var(--u))_rgba(11,11,11,0.5)] [font-size:calc(11*var(--u))] [padding:calc(7*var(--u))_calc(12*var(--u))] max-[900px]:hidden";
+  "absolute top-[calc(356*var(--u))] whitespace-nowrap rounded-full bg-ink font-medium text-paper [box-shadow:0_calc(10*var(--u))_calc(24*var(--u))_calc(-10*var(--u))_rgba(11,11,11,0.5)] [font-size:calc(11.5*var(--u))] [padding:calc(7*var(--u))_calc(12*var(--u))] max-[900px]:hidden";
 
 const chipStyle: React.CSSProperties = {
   opacity: "clamp(0, calc(var(--c) * 2 - 0.4), 1)",

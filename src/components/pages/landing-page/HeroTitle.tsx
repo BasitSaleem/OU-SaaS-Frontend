@@ -1,6 +1,7 @@
 "use client";
 
 import { useHoverWordSpotlight } from "@/hooks/useHoverWordSpotlight";
+import { HERO_H1_SIZE } from "@/styles/sectionClasses";
 
 const HeroTitle: React.FC = () => {
   const hoverwordRef = useHoverWordSpotlight<HTMLSpanElement>();
@@ -8,7 +9,7 @@ const HeroTitle: React.FC = () => {
   return (
     <h1
       id="hero-title"
-      className="mt-5 flex flex-col text-[clamp(44px,7.1vw,104px)] leading-[0.96] font-semibold tracking-[-0.058em]"
+      className={`mt-5 flex flex-col ${HERO_H1_SIZE} leading-[0.96] font-semibold tracking-[-0.058em]`}
     >
       <span className="animate-[intro_1100ms_var(--ease-out)_both] [animation-delay:160ms]">
         Business{" "}

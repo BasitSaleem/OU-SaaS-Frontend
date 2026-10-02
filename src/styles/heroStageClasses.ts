@@ -9,14 +9,19 @@ export const NODE_MOBILE_CONNECTOR =
 export const NODE_HEAD = "flex items-center justify-between";
 
 export const NODE_ROLE =
-  "rounded-full bg-paper font-mono tracking-[0.08em] text-neutral uppercase [font-size:calc(10.5*var(--u))] [padding:calc(4*var(--u))_calc(8*var(--u))]";
+  "inline-flex items-center gap-[calc(6*var(--u))] rounded-full bg-[rgb(var(--tone-rgb)/0.08)] font-medium text-[var(--tone-ink)] [box-shadow:inset_0_0_0_1px_rgb(var(--tone-rgb)/0.12)] [font-size:calc(11.5*var(--u))] [padding:calc(4*var(--u))_calc(10*var(--u))_calc(4*var(--u))_calc(8*var(--u))]";
+export const NODE_ROLE_DOT = "rounded-full bg-current [height:calc(6*var(--u))] [width:calc(6*var(--u))]";
 
 export const NODE_METRIC = "mt-[calc(4*var(--u))] flex flex-col gap-[calc(2*var(--u))]";
 export const NODE_LABEL = "text-neutral [font-size:calc(12*var(--u))]";
-export const NODE_VALUE = "font-semibold leading-[1.1] tracking-[-0.04em] [font-size:calc(30*var(--u))]";
-export const NODE_VALUE_DELTA = "ml-[calc(6*var(--u))] align-middle font-medium text-[#0f7a5a] not-italic [font-size:calc(12*var(--u))]";
+export const NODE_VALUE =
+  "flex items-center gap-[calc(8*var(--u))] font-semibold leading-[1.1] tracking-[-0.045em] tabular-nums [font-size:calc(30*var(--u))]";
+export const NODE_VALUE_DELTA =
+  "inline-flex items-center gap-[calc(3*var(--u))] rounded-full bg-[rgb(15_122_90/0.09)] font-semibold tracking-normal text-[#0f7a5a] not-italic [font-size:calc(11.5*var(--u))] [padding:calc(3*var(--u))_calc(7*var(--u))_calc(3*var(--u))_calc(6*var(--u))]";
 
 export const NODE_ROWS =
-  "mt-auto flex flex-col gap-[calc(8*var(--u))] border-t border-line [padding-top:calc(12*var(--u))] max-[900px]:mt-1";
-export const NODE_ROW_ITEM = "flex items-center gap-[calc(8*var(--u))] text-[#3d3d3d] [font-size:calc(12*var(--u))]";
-export const NODE_ROW_ICON = "shrink-0 text-neutral [width:calc(14*var(--u))] [height:calc(14*var(--u))]";
+  "mt-auto flex flex-col gap-[calc(7*var(--u))] border-t border-[rgb(11_11_11/0.06)] [padding-top:calc(12*var(--u))] max-[900px]:mt-1";
+export const NODE_ROW_ITEM = "flex items-center gap-[calc(9*var(--u))] text-[#3d3d3d] [font-size:calc(12*var(--u))]";
+export const NODE_ROW_ICON_BOX =
+  "grid shrink-0 place-items-center rounded-[calc(7*var(--u))] bg-[rgb(var(--tone-rgb)/0.08)] text-[var(--tone-ink)] [height:calc(22*var(--u))] [width:calc(22*var(--u))]";
+export const NODE_ROW_ICON_BOX_WARN = "!bg-coral/10 !text-coral";

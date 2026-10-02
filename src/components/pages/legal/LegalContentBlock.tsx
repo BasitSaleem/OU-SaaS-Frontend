@@ -1,20 +1,13 @@
-import Link from "next/link";
+import LegalLink from "./LegalLink";
 import type { ContentBlock, ListItem, TextSegment } from "@/constant/legal/legalTypes";
-
-const INLINE_LINK_CLASS =
-  "font-medium text-[#0b0b0b] [background:linear-gradient(#f95c5b,#f95c5b)_0_100%_/_100%_1px_no-repeat] transition-all duration-200 hover:text-[#f95c5b]";
 
 const renderSegment = (segment: TextSegment, i: number) => {
   if (typeof segment === "string") return <span key={i}>{segment}</span>;
 
-  return segment.href.startsWith("/") ? (
-    <Link key={i} href={segment.href} className={INLINE_LINK_CLASS}>
+  return (
+    <LegalLink key={i} href={segment.href}>
       {segment.text}
-    </Link>
-  ) : (
-    <a key={i} href={segment.href} className={INLINE_LINK_CLASS}>
-      {segment.text}
-    </a>
+    </LegalLink>
   );
 };
 
@@ -29,21 +22,7 @@ const renderListItem = (item: ListItem, i: number) => (
       <>
         {item.strong && <strong className="font-semibold text-[#0b0b0b]">{item.strong} </strong>}
         {item.text && <span>{item.text} </span>}
-        {item.link &&
-          (item.link.href.startsWith("/") ? (
-            <Link href={item.link.href} className={INLINE_LINK_CLASS}>
-              {item.link.text}
-            </Link>
-          ) : (
-            <a
-              href={item.link.href}
-              target="_blank"
-              rel="noopener noreferrer"
-              className={INLINE_LINK_CLASS}
-            >
-              {item.link.text}
-            </a>
-          ))}
+        {item.link && <LegalLink href={item.link.href}>{item.link.text}</LegalLink>}
       </>
     )}
   </li>
@@ -124,9 +103,7 @@ const LegalContentBlock: React.FC<{ block: ContentBlock }> = ({ block }) => {
         </svg>
         <span>
           Email:{" "}
-          <a href={`mailto:${block.email}`} className={INLINE_LINK_CLASS}>
-            {block.email}
-          </a>
+          <LegalLink href={`mailto:${block.email}`}>{block.email}</LegalLink>
         </span>
       </div>
     </div>

@@ -2,7 +2,7 @@ import PageHeroField from "@/components/common-components/PageHeroField";
 import Breadcrumbs from "@/components/common-components/Breadcrumbs";
 import HoverWord from "@/components/common-components/HoverWord";
 import ProductDoor from "./ProductDoor";
-import { CONTAINER } from "@/styles/sectionClasses";
+import { CONTAINER, HERO_H1_SIZE } from "@/styles/sectionClasses";
 import { PRODUCT_DOORS, PRODUCTS_HERO } from "@/constant/productsPageData";
 
 const INTRO = "animate-[intro_1100ms_var(--ease-out)_both]";
@@ -13,7 +13,7 @@ const ProductsHero: React.FC = () => (
       <Breadcrumbs items={PRODUCTS_HERO.breadcrumb} className={`${INTRO} [animation-delay:80ms]`} />
       <h1
         id="phero-title"
-        className={`${INTRO} mt-5 text-[clamp(52px,8vw,116px)] leading-[0.96] font-semibold tracking-[-0.06em] [animation-delay:160ms]`}
+        className={`${INTRO} mt-5 ${HERO_H1_SIZE} leading-[0.96] font-semibold tracking-[-0.06em] [animation-delay:160ms]`}
       >
         {PRODUCTS_HERO.titleLead} <HoverWord>{PRODUCTS_HERO.titleWord}</HoverWord>
       </h1>

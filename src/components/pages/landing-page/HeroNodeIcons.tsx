@@ -1,19 +1,18 @@
 const ICON_PATHS: Record<string, React.ReactNode> = {
-  star: <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />,
-  phone: (
-    <>
-      <polyline points="16 2 16 8 22 8" />
-      <line x1="23" y1="1" x2="16" y2="8" />
-      <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" />
-    </>
-  ),
+  star: <path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a.53.53 0 0 0 .399.29l5.166.756a.53.53 0 0 1 .294.904l-3.738 3.648a.53.53 0 0 0-.152.469l.882 5.143a.53.53 0 0 1-.77.559l-4.62-2.43a.53.53 0 0 0-.494 0l-4.62 2.43a.53.53 0 0 1-.77-.559l.882-5.143a.53.53 0 0 0-.152-.469L2.66 8.924a.53.53 0 0 1 .294-.904l5.166-.756a.53.53 0 0 0 .399-.29s0 0 0 0z" />,
+  phone: <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" />,
   package: (
     <>
-      <path d="m16 16 2 2 4-4" />
-      <path d="M21 10V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l2-1.14" />
       <path d="m7.5 4.27 9 5.15" />
-      <polyline points="3.29 7 12 12 20.71 7" />
-      <line x1="12" y1="22" x2="12" y2="12" />
+      <path d="M21 8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z" />
+      <path d="m3.3 7 8.7 5 8.7-5" />
+      <path d="M12 22V12" />
+    </>
+  ),
+  trend: (
+    <>
+      <path d="m22 7-8.5 8.5-5-5L2 17" />
+      <path d="M16 7h6v6" />
     </>
   ),
   alert: (
@@ -35,7 +34,7 @@ const ICON_PATHS: Record<string, React.ReactNode> = {
 export type HeroNodeIconKey = keyof typeof ICON_PATHS;
 
 const HeroNodeIcon: React.FC<{ name: HeroNodeIconKey; className?: string }> = ({ name, className }) => (
-  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={name === "check" ? 2.25 : 1.75} strokeLinecap="round" strokeLinejoin="round" className={className} aria-hidden>
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={name === "check" || name === "trend" ? 2.25 : 1.75} strokeLinecap="round" strokeLinejoin="round" className={className} aria-hidden>
     {ICON_PATHS[name]}
   </svg>
 );

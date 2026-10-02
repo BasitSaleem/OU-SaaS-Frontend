@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Image from "next/image";
+import { useTiltGlow } from "@/hooks/useTiltGlow";
 import type { SupportChannel } from "@/constant/contactChannelsData";
 
 const CopyButton: React.FC<{ email: string }> = ({ email }) => {
@@ -41,37 +42,24 @@ const CopyButton: React.FC<{ email: string }> = ({ email }) => {
   );
 };
 
+const TONE_RGB: Record<string, string> = {
+  account: "11 11 11",
+  pulse: "249 92 91",
+  inventory: "121 92 245",
+};
+
 const SupportChannelCard: React.FC<{ channel: SupportChannel }> = ({ channel }) => {
-  const [mousePos, setMousePos] = useState({ x: "50%", y: "50%" });
-  const isInk = channel.id === "account";
-  const isPulse = channel.id === "pulse";
-
-  const handlePointerMove = (e: React.PointerEvent<HTMLDivElement>) => {
-    const rect = e.currentTarget.getBoundingClientRect();
-    setMousePos({
-      x: `${e.clientX - rect.left}px`,
-      y: `${e.clientY - rect.top}px`,
-    });
-  };
-
-  const toneRgb = isInk ? "11 11 11" : isPulse ? "249 92 91" : "121 92 245";
+  const cardRef = useTiltGlow<HTMLDivElement>();
 
   return (
     <div
-      onPointerMove={handlePointerMove}
-      style={
-        {
-          "--dx": mousePos.x,
-          "--dy": mousePos.y,
-        } as React.CSSProperties
-      }
-      className="group relative flex flex-col gap-3 overflow-hidden rounded-[24px] border border-[#e4e4e0] bg-white p-7 shadow-[0_1px_2px_rgba(11,11,11,0.04),0_12px_32px_-22px_rgba(11,11,11,0.2)] transition-all duration-400 ease-[cubic-bezier(0.22,1,0.36,1)] hover:-translate-y-1 hover:border-[rgb(var(--tone-rgb)/0.22)] hover:shadow-[0_2px_4px_rgba(11,11,11,0.04),0_34px_60px_-32px_rgba(var(--tone-rgb)/0.45)]"
+      ref={cardRef}
+      style={{ "--tone-rgb": TONE_RGB[channel.id] ?? TONE_RGB.inventory, "--dx": "50%", "--dy": "50%" } as React.CSSProperties}
+      className="group relative isolate flex flex-col gap-3 overflow-hidden rounded-[24px] border border-line bg-white p-7 shadow-[0_1px_2px_rgb(11_11_11/0.04),0_12px_32px_-22px_rgb(11_11_11/0.2)] [transition:transform_var(--med)_var(--ease-out),box-shadow_var(--med)_var(--ease-out),border-color_var(--fast)] hover:-translate-y-1 hover:border-[rgb(var(--tone-rgb)/0.22)] hover:shadow-[0_2px_4px_rgb(11_11_11/0.04),0_34px_60px_-32px_rgb(var(--tone-rgb)/0.45)]"
     >
       <div
-        className="pointer-events-none absolute inset-0 -z-1 opacity-0 transition-opacity duration-400 ease-out group-hover:opacity-100"
-        style={{
-          background: `radial-gradient(340px circle at var(--dx) var(--dy), rgb(${toneRgb} / 0.08), transparent 70%)`,
-        }}
+        aria-hidden
+        className="pointer-events-none absolute inset-0 -z-1 opacity-0 transition-opacity duration-[420ms] ease-out group-hover:opacity-100 [background-image:radial-gradient(340px_circle_at_var(--dx)_var(--dy),rgb(var(--tone-rgb)/0.08),transparent_70%)]"
       />
 
       <div className="mb-1.5 flex h-[44px] items-center">

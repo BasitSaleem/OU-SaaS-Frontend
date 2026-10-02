@@ -3,12 +3,12 @@ import BusCellNode from "./BusCellNode";
 import BusCellNext from "./BusCellNext";
 import type { BusFeatureRow as BusFeatureRowData } from "@/constant/whyData";
 
-const BusFeatureRow: React.FC<{ row: BusFeatureRowData }> = ({ row }) => (
+const BusFeatureRow: React.FC<{ row: BusFeatureRowData; index: number }> = ({ row, index }) => (
   <>
     <BusLabel icon={row.icon} title={row.title} />
     <BusCellNode />
     <BusCellNode />
-    <BusCellNext />
+    <BusCellNext row={index} />
   </>
 );
 
