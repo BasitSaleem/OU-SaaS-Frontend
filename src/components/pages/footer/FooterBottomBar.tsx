@@ -1,4 +1,3 @@
-import FooterSocial from "./FooterSocial";
 import FooterBackToTop from "./FooterBackToTop";
 import { FOOTER_ADDRESS } from "@/constant/navigationData";
 
@@ -8,10 +7,7 @@ const FooterBottomBar: React.FC = () => (
       <p className="text-[13px] text-neutral">&copy; 2026 Owners Universe. All rights reserved.</p>
       <address className="text-[13px] text-neutral not-italic">{FOOTER_ADDRESS}</address>
     </div>
-    <div className="flex items-center gap-3.5">
-      <FooterSocial />
-      <FooterBackToTop />
-    </div>
+    <FooterBackToTop />
   </div>
 );
 

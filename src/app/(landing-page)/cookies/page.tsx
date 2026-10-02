@@ -1,3 +1,5 @@
+import JsonLd from "@/components/common-components/JsonLd";
+import { SEO_SCHEMAS } from "@/constant/seoSchemas";
 import LegalHero from "@/components/pages/legal/LegalHero";
 import LegalLayout from "@/components/pages/legal/LegalLayout";
 import LegalNav from "@/components/pages/legal/LegalNav";
@@ -6,6 +8,7 @@ import { COOKIES_SECTIONS, COOKIES_SECTION_IDS, COOKIES_CONTENT } from "@/consta
 
 const Page = () => (
   <main className="min-h-screen bg-paper">
+    <JsonLd data={SEO_SCHEMAS["8 - Cookie Policy"]} />
     <LegalHero title="Cookie Policy" updatedDate="September 2026" />
     <LegalLayout nav={<LegalNav sections={COOKIES_SECTIONS} sectionIds={COOKIES_SECTION_IDS} />}>
       {COOKIES_SECTIONS.map((section, i) => (

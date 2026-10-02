@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import { DM_Sans, Geist, Geist_Mono, Outfit } from "next/font/google";
 import Navbar from "@/components/pages/navbar/Navbar";
 import CustomCursor from "@/components/CustomCursor";
+import JsonLd from "@/components/common-components/JsonLd";
+import { SEO_SCHEMAS } from "@/constant/seoSchemas";
 import "./globals.css";
 
 const outfit = Outfit({
@@ -45,6 +47,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       data-scroll-behavior="smooth"
       className={`${outfit.variable} ${dmSans.variable} ${geist.variable} ${geistMono.variable}`}
     >
+      <head>
+        <JsonLd data={SEO_SCHEMAS["1 - Sitewide (Organization + WebSite)"]} />
+      </head>
       <body className="font-sans antialiased">
         <Navbar />
         <CustomCursor />
