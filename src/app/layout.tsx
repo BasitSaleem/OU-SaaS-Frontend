@@ -33,6 +33,9 @@ export const metadata: Metadata = {
   title: "Owners Universe — Business Software for Service Industries",
   description:
     "The platform behind Owners Pulse and Owners Inventory. Marketing automation for home services. POS and operations for retail. One account, all products.",
+  verification: {
+    google: "ORTD_406SfKBSSjokTrt1Ad3DNh6V6CHh8Y9ewQbwEg",
+  },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
