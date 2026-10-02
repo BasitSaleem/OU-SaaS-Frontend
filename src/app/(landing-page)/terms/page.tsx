@@ -1,5 +1,3 @@
-import JsonLd from "@/components/common-components/JsonLd";
-import { SEO_SCHEMAS } from "@/constant/seoSchemas";
 import LegalHero from "@/components/pages/legal/LegalHero";
 import LegalLayout from "@/components/pages/legal/LegalLayout";
 import LegalNav from "@/components/pages/legal/LegalNav";
@@ -8,7 +6,6 @@ import { TERMS_SECTIONS, TERMS_SECTION_IDS, TERMS_CONTENT } from "@/constant/leg
 
 const Page = () => (
   <main className="min-h-screen bg-paper">
-    <JsonLd data={SEO_SCHEMAS["7 - Terms of Service"]} />
     <LegalHero title="Terms of Service" updatedDate="September 2026" />
     <LegalLayout nav={<LegalNav sections={TERMS_SECTIONS} sectionIds={TERMS_SECTION_IDS} />}>
       {TERMS_SECTIONS.map((section, i) => (

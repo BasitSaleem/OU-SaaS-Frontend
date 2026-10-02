@@ -279,56 +279,71 @@ const COOKIES_SCHEMA = legalPage({
     "Learn how Owners Universe uses cookies and similar technologies for essential functions, analytics, preferences, advertising, and service improvements.",
 });
 
+/** Organization + WebSite: injected on every page except the homepage, whose graph already contains them. */
+const SITEWIDE_NODES = [
+    {
+      "@type": "Organization",
+      "@id": ORGANIZATION_ID,
+      name: "Owners Universe",
+      url: `${SITE_URL}/`,
+      logo: {
+        "@type": "ImageObject",
+        "@id": `${SITE_URL}/#logo`,
+        url: LOGO_URL,
+        contentUrl: LOGO_URL,
+      },
+      description:
+        "Business software for service industries, with purpose-built products for home services and retail businesses.",
+      address: {
+        "@type": "PostalAddress",
+        streetAddress: "4254 Normandy Ct",
+        addressLocality: "Fredericksburg",
+        addressRegion: "VA",
+        postalCode: "22408",
+        addressCountry: "US",
+      },
+      contactPoint: {
+        "@type": "ContactPoint",
+        contactType: "customer support",
+        url: `${SITE_URL}/contact`,
+      },
+    },
+    {
+      "@type": "WebSite",
+      "@id": WEBSITE_ID,
+      url: `${SITE_URL}/`,
+      name: "Owners Universe",
+      description: "Business software for service industries.",
+      inLanguage: "en-US",
+      publisher: ORG_REF,
+    },
+  ];
+
+/** Homepage entity, wired to the sitewide WebSite and Organization. */
+const HOME_PAGE_NODE = {
+  "@type": "WebPage",
+  "@id": `${SITE_URL}/#webpage`,
+  url: `${SITE_URL}/`,
+  name: "Owners Universe",
+  description:
+    "Owners Universe provides purpose-built business software for service industries, including marketing automation for home services and POS and operations management for retail.",
+  isPartOf: WEBSITE_REF,
+  about: ORG_REF,
+  publisher: ORG_REF,
+  inLanguage: "en-US",
+};
+
 export const SEO_SCHEMAS = {
   "1 - Sitewide (Organization + WebSite)": {
     "@context": CONTEXT,
-    "@graph": [
-      {
-        "@type": "Organization",
-        "@id": ORGANIZATION_ID,
-        name: "Owners Universe",
-        url: `${SITE_URL}/`,
-        logo: {
-          "@type": "ImageObject",
-          "@id": `${SITE_URL}/#logo`,
-          url: LOGO_URL,
-          contentUrl: LOGO_URL,
-        },
-        description:
-          "Business software for service industries, with purpose-built products for home services and retail businesses.",
-        address: {
-          "@type": "PostalAddress",
-          streetAddress: "4254 Normandy Ct",
-          addressLocality: "Fredericksburg",
-          addressRegion: "VA",
-          postalCode: "22408",
-          addressCountry: "US",
-        },
-        contactPoint: {
-          "@type": "ContactPoint",
-          contactType: "customer support",
-          url: `${SITE_URL}/contact`,
-        },
-      },
-      {
-        "@type": "WebSite",
-        "@id": WEBSITE_ID,
-        url: `${SITE_URL}/`,
-        name: "Owners Universe",
-        description: "Business software for service industries.",
-        inLanguage: "en-US",
-        publisher: ORG_REF,
-      },
-    ],
+    "@graph": SITEWIDE_NODES,
   },
 
-  "2 - Homepage": page({
-    type: "WebPage",
-    path: "/",
-    name: "Owners Universe",
-    description:
-      "Owners Universe provides purpose-built business software for service industries, including marketing automation for home services and POS and operations management for retail.",
-  }),
+  /** One self-contained block: the sitewide Organization + WebSite plus the homepage itself. */
+  "2 - Homepage": {
+    "@context": CONTEXT,
+    "@graph": [...SITEWIDE_NODES, HOME_PAGE_NODE],
+  },
 
   "3 - Products": PRODUCTS_SCHEMA,
 
@@ -351,3 +366,16 @@ export const SEO_SCHEMAS = {
 } as const;
 
 export type SeoSchemaKey = keyof typeof SEO_SCHEMAS;
+
+const SITEWIDE = SEO_SCHEMAS["1 - Sitewide (Organization + WebSite)"];
+
+/** JSON-LD blocks to render for each route, in order. The homepage's graph already contains the sitewide nodes. */
+export const PAGE_SCHEMAS: Record<string, readonly object[]> = {
+  "/": [SEO_SCHEMAS["2 - Homepage"]],
+  "/products": [SITEWIDE, SEO_SCHEMAS["3 - Products"]],
+  "/about": [SITEWIDE, SEO_SCHEMAS["4 - About"]],
+  "/contact": [SITEWIDE, SEO_SCHEMAS["5 - Contact"]],
+  "/privacy": [SITEWIDE, SEO_SCHEMAS["6 - Privacy Policy"]],
+  "/terms": [SITEWIDE, SEO_SCHEMAS["7 - Terms of Service"]],
+  "/cookies": [SITEWIDE, SEO_SCHEMAS["8 - Cookie Policy"]],
+};
