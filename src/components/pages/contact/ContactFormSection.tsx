@@ -2,6 +2,8 @@
 
 import { useState, useEffect } from "react";
 import Reveal from "@/components/common-components/Reveal";
+import RecaptchaField from "@/components/common-components/RecaptchaField";
+import { submitLeadAction } from "@/actions/submitLead";
 import { CONTAINER } from "@/styles/sectionClasses";
 import { CONTACT_TOPICS } from "@/constant/contactData";
 
@@ -14,11 +16,10 @@ const ContactFormSection: React.FC = () => {
 
   const [errors, setErrors] = useState<{ name?: string; email?: string; message?: string }>({});
   const [isSubmitted, setIsSubmitted] = useState(false);
-  const [lastPayload, setLastPayload] = useState("");
-  const [copiedPayload, setCopiedPayload] = useState(false);
-
-  const currentTopicObj = CONTACT_TOPICS.find((t) => t.value === selectedTopic) || CONTACT_TOPICS[0];
-  const currentRecipient = currentTopicObj.recipient;
+  const [isSending, setIsSending] = useState(false);
+  const [submitError, setSubmitError] = useState("");
+  const [recaptchaToken, setRecaptchaToken] = useState<string | null>(null);
+  const [recaptchaResetKey, setRecaptchaResetKey] = useState(0);
 
   // Listen for topic pick custom event or hash change
   useEffect(() => {
@@ -31,8 +32,9 @@ const ContactFormSection: React.FC = () => {
     return () => window.removeEventListener("pickContactTopic", handlePickTopic as EventListener);
   }, []);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (isSending) return;
     const newErrors: { name?: string; email?: string; message?: string } = {};
 
     if (!name.trim()) {
@@ -52,18 +54,31 @@ const ContactFormSection: React.FC = () => {
     }
 
     setErrors({});
-    const payload = `${message.trim()}\n\n${name.trim()}\n${email.trim()}${company.trim() ? `\n${company.trim()}` : ""}`;
-    setLastPayload(payload);
-
-    const mailtoHref = `mailto:${currentRecipient}?subject=${encodeURIComponent(`${selectedTopic} | ${name.trim()}`)}&body=${encodeURIComponent(payload)}`;
-
-    try {
-      window.location.href = mailtoHref;
-    } catch {
-      // Ignore
+    if (!recaptchaToken) {
+      setSubmitError("Please complete the reCAPTCHA challenge.");
+      return;
     }
 
-    setIsSubmitted(true);
+    setSubmitError("");
+    setIsSending(true);
+    try {
+      const result = await submitLeadAction(
+        { name: name.trim(), email: email.trim(), company: company.trim(), message: message.trim(), topic: selectedTopic },
+        recaptchaToken
+      );
+      if (result.success) {
+        setIsSubmitted(true);
+      } else {
+        setSubmitError(result.error || "Something went wrong. Please try again.");
+      }
+    } catch {
+      setSubmitError("Something went wrong. Please try again.");
+    } finally {
+      // A reCAPTCHA token can only be verified once, so the visitor needs a fresh one for any retry.
+      setRecaptchaToken(null);
+      setRecaptchaResetKey((k) => k + 1);
+      setIsSending(false);
+    }
   };
 
   const handleReset = () => {
@@ -72,17 +87,8 @@ const ContactFormSection: React.FC = () => {
     setCompany("");
     setMessage("");
     setErrors({});
+    setSubmitError("");
     setIsSubmitted(false);
-  };
-
-  const handleCopyPayload = async () => {
-    try {
-      await navigator.clipboard.writeText(lastPayload);
-      setCopiedPayload(true);
-      setTimeout(() => setCopiedPayload(false), 1800);
-    } catch {
-      // Fallback
-    }
   };
 
   return (
@@ -128,13 +134,6 @@ const ContactFormSection: React.FC = () => {
                         );
                       })}
                     </div>
-                    <p className="mt-2.5 inline-flex items-center gap-1.5 text-[13px] text-[#6b6b6b]">
-                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round">
-                        <rect width="20" height="16" x="2" y="4" rx="2" />
-                        <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" />
-                      </svg>
-                      Goes to <strong className="font-medium text-[#0b0b0b]">{currentRecipient}</strong>
-                    </p>
                   </fieldset>
 
                   {/* Form Row: Name & Email */}
@@ -213,13 +212,22 @@ const ContactFormSection: React.FC = () => {
                     {errors.message && <span className="text-[13px] text-[#c2413f]">{errors.message}</span>}
                   </div>
 
+                  <RecaptchaField onChange={setRecaptchaToken} resetKey={recaptchaResetKey} />
+
+                  {submitError && (
+                    <p role="alert" className="text-[14px] text-[#c2413f]">
+                      {submitError}
+                    </p>
+                  )}
+
                   {/* Submit Action */}
                   <div className="mt-1 flex justify-end max-[760px]:justify-stretch">
                     <button
                       type="submit"
-                      className="group inline-flex h-[52px] items-center justify-center gap-2 rounded-full bg-[#0b0b0b] px-[28px] text-[16px] font-semibold text-[#f7f7f5] transition-all duration-180 hover:bg-[#1a1a1a] hover:shadow-[0_2px_4px_rgba(11,11,11,0.04),0_12px_32px_-8px_rgba(11,11,11,0.1)] active:scale-[0.97] max-[760px]:w-full"
+                      disabled={isSending}
+                      className="group inline-flex h-[52px] items-center justify-center gap-2 rounded-full bg-[#0b0b0b] px-[28px] text-[16px] font-semibold text-[#f7f7f5] transition-all duration-180 hover:bg-[#1a1a1a] hover:shadow-[0_2px_4px_rgba(11,11,11,0.04),0_12px_32px_-8px_rgba(11,11,11,0.1)] active:scale-[0.97] disabled:cursor-not-allowed disabled:opacity-60 max-[760px]:w-full"
                     >
-                      <span>Send message</span>
+                      <span>{isSending ? "Sending…" : "Send message"}</span>
                       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round" className="transition-transform duration-400 ease-out group-hover:translate-x-0.75 group-hover:-translate-y-0.75 group-hover:-rotate-6">
                         <path d="m22 2-7 20-4-9-9-4Z" />
                         <path d="M22 2 11 13" />
@@ -236,31 +244,15 @@ const ContactFormSection: React.FC = () => {
                       <path d="m9 12 2 2 4-4" />
                     </svg>
                   </span>
-                  <h3 className="text-[22px] font-semibold tracking-[-0.03em] text-[#0b0b0b]">Almost there</h3>
+                  <h3 className="text-[22px] font-semibold tracking-[-0.03em] text-[#0b0b0b]">Message sent</h3>
                   <p className="text-[15.5px] text-[#6b6b6b]">
-                    We opened your email app with your message addressed to <strong className="font-medium text-[#0b0b0b]">{currentRecipient}</strong>.
+                    Thanks, {name.trim().split(/\s+/)[0]}. We&apos;ve received your message about{" "}
+                    <strong className="font-medium text-[#0b0b0b]">{selectedTopic}</strong>.
                   </p>
                   <p className="text-[14px] text-[#6b6b6b]">
-                    Press send there to finish. If nothing opened, copy your message and email it to <strong className="font-medium text-[#0b0b0b]">{currentRecipient}</strong>.
+                    Our team will reply to <strong className="font-medium text-[#0b0b0b]">{email.trim()}</strong> soon.
                   </p>
                   <div className="mt-3 flex flex-wrap gap-2.5">
-                    <button
-                      type="button"
-                      onClick={handleCopyPayload}
-                      className="inline-flex h-[44px] items-center justify-center gap-2 rounded-full border border-[#e4e4e0] bg-[#f7f7f5] px-5 text-[14.5px] font-semibold text-[#0b0b0b] transition-colors duration-180 hover:border-[#0b0b0b] hover:bg-white"
-                    >
-                      <span>{copiedPayload ? "Copied" : "Copy message"}</span>
-                      {copiedPayload ? (
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                          <path d="M20 6 9 17l-5-5" />
-                        </svg>
-                      ) : (
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round">
-                          <rect width="14" height="14" x="8" y="8" rx="2" ry="2" />
-                          <path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2" />
-                        </svg>
-                      )}
-                    </button>
                     <button
                       type="button"
                       onClick={handleReset}

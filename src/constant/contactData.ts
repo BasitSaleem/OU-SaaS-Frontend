@@ -5,13 +5,12 @@ export const CONTACT_HERO_SUB =
 export interface TopicOption {
   value: string;
   label: string;
-  recipient: string;
 }
 
 export const CONTACT_TOPICS: TopicOption[] = [
-  { value: "Account & Login", label: "Account & Login", recipient: "accounts@ownersuniverse.com" },
-  { value: "Owners Pulse", label: "Owners Pulse", recipient: "support@ownerspulse.com" },
-  { value: "Owners Inventory", label: "Owners Inventory", recipient: "support@ownersinventory.com" },
-  { value: "Partnership Inquiry", label: "Partnership Inquiry", recipient: "accounts@ownersuniverse.com" },
-  { value: "Investment Inquiry", label: "Investment Inquiry", recipient: "accounts@ownersuniverse.com" },
+  { value: "Account & Login", label: "Account & Login" },
+  { value: "Owners Pulse", label: "Owners Pulse" },
+  { value: "Owners Inventory", label: "Owners Inventory" },
+  { value: "Partnership Inquiry", label: "Partnership Inquiry" },
+  { value: "Investment Inquiry", label: "Investment Inquiry" },
 ];

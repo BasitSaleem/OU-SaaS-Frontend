@@ -100,7 +100,7 @@ const ContactInvestors: React.FC = () => {
                   className="group inline-flex h-10 items-center gap-1.5 rounded-full border border-[#333] px-4 text-[14px] font-medium text-[#f7f7f5] transition-all duration-300 hover:-translate-y-0.5 hover:border-[#f7f7f5] hover:bg-white/6"
                 >
                   <span>&quot;Investment Inquiry&quot;</span>
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" className="text-[#8a8a87] transition-all duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:text-[#f7f7f5]">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-[#8a8a87] transition-all duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:text-[#f7f7f5]">
                     <path d="M7 17L17 7" />
                     <path d="M7 7h10v10" />
                   </svg>
