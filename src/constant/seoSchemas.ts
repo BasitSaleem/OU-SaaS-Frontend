@@ -16,53 +16,57 @@ const LOGO_URL = `${SITE_URL}/assets/logos/owners-universe.svg`;
 const ORG_REF = { "@id": ORGANIZATION_ID };
 const WEBSITE_REF = { "@id": WEBSITE_ID };
 
-const url = (path: string) => (path === "/" ? `${SITE_URL}/` : `${SITE_URL}${path}`);
+const ABOUT_URL = `${SITE_URL}/about`;
 
-interface PageOptions {
-  type: "WebPage" | "AboutPage" | "ContactPage" | "CollectionPage";
-  path: string;
-  name: string;
-  description: string;
-  /** Breadcrumb trail after "Home". */
-  crumbs?: { name: string; path: string }[];
-  dateModified?: string;
-  extra?: object[];
-}
-
-/** A page entity wired to the sitewide WebSite/Organization, plus its breadcrumb trail. */
-const page = ({ type, path, name, description, crumbs = [], dateModified, extra = [] }: PageOptions) => ({
+/**
+ * /about: the page, its breadcrumb, and the Organization with its slogan and brands.
+ * The page's mainEntity points at the Organization's real @id (/#organization).
+ */
+const ABOUT_SCHEMA = {
   "@context": CONTEXT,
   "@graph": [
     {
-      "@type": type,
-      "@id": `${url(path)}#webpage`,
-      url: url(path),
-      name,
-      description,
+      "@type": "AboutPage",
+      "@id": `${ABOUT_URL}#webpage`,
+      url: ABOUT_URL,
+      name: "About Owners Universe",
+      description:
+        "Learn about Owners Universe, the company building purpose-built business software for service industries, including home services and retail.",
+      mainEntity: ORG_REF,
       inLanguage: "en-US",
-      isPartOf: WEBSITE_REF,
-      about: ORG_REF,
-      publisher: ORG_REF,
-      ...(dateModified && { dateModified }),
-      ...(crumbs.length > 0 && { breadcrumb: { "@id": `${url(path)}#breadcrumb` } }),
     },
-    ...(crumbs.length > 0
-      ? [
-          {
-            "@type": "BreadcrumbList",
-            "@id": `${url(path)}#breadcrumb`,
-            itemListElement: [{ name: "Home", path: "/" }, ...crumbs].map((crumb, i) => ({
-              "@type": "ListItem",
-              position: i + 1,
-              name: crumb.name,
-              item: url(crumb.path),
-            })),
-          },
-        ]
-      : []),
-    ...extra,
+    {
+      "@type": "BreadcrumbList",
+      "@id": `${ABOUT_URL}#breadcrumb`,
+      itemListElement: [
+        { "@type": "ListItem", position: 1, name: "Home", item: `${SITE_URL}/` },
+        { "@type": "ListItem", position: 2, name: "About", item: ABOUT_URL },
+      ],
+    },
+    {
+      "@type": "Organization",
+      "@id": ORGANIZATION_ID,
+      name: "Owners Universe",
+      url: `${SITE_URL}/`,
+      logo: { "@type": "ImageObject", "@id": `${ABOUT_URL}#logo`, url: LOGO_URL, contentUrl: LOGO_URL },
+      description:
+        "Owners Universe builds purpose-built, industry-specific business software for service industries, including home services and retail.",
+      slogan: "We build software for people who build businesses.",
+      address: {
+        "@type": "PostalAddress",
+        streetAddress: "4254 Normandy Ct",
+        addressLocality: "Fredericksburg",
+        addressRegion: "VA",
+        postalCode: "22408",
+        addressCountry: "US",
+      },
+      brand: [
+        { "@type": "Brand", name: "Owners Pulse", url: "https://ownerspulse.com/" },
+        { "@type": "Brand", name: "Owners Inventory", url: "https://ownersinventory.com/" },
+      ],
+    },
   ],
-});
+};
 
 const PRODUCTS_URL = `${SITE_URL}/products`;
 const PULSE_ID = `${PRODUCTS_URL}#owners-pulse`;
@@ -79,7 +83,7 @@ const PRODUCTS_SCHEMA = {
       name: "Products | Owners Universe",
       description:
         "Explore the products from Owners Universe, including Owners Pulse for home services and Owners Inventory for retail and other business industries.",
-      isPartOf: { "@type": "WebSite", "@id": WEBSITE_ID, name: "Owners Universe", url: `${SITE_URL}/` },
+      isPartOf: WEBSITE_REF,
       mainEntity: { "@id": `${PRODUCTS_URL}#product-list` },
       breadcrumb: { "@id": `${PRODUCTS_URL}#breadcrumb` },
       inLanguage: "en-US",
@@ -114,18 +118,6 @@ const PRODUCTS_SCHEMA = {
       operatingSystem: "Web",
       description:
         "Owners Pulse is an all-in-one marketing automation platform built for home services businesses, combining CRM, automated review requests, online booking, estimate follow-up, AI phone receptionist, and other marketing capabilities.",
-      featureList: [
-        "Automated Review Engine with Rating Gate",
-        "Smart Booking",
-        "CRM",
-        "Estimate Follow-Up",
-        "Customer Reactivation",
-        "Seasonal Campaigns",
-        "Speed-to-Lead",
-        "AI Phone Receptionist",
-        "Job Profitability Tracker",
-        "Neighborhood Marketing",
-      ],
     },
     {
       "@type": "SoftwareApplication",
@@ -161,7 +153,7 @@ interface LegalPageOptions {
   description: string;
 }
 
-/** A legal page and its breadcrumb. dateModified is month-precision, matching the "Last Updated: September 2026" printed on the page. */
+/** A legal page and its separate BreadcrumbList (the page itself does not link to it). dateModified is month-precision, matching the "Last Updated: September 2026" printed on the page. */
 const legalPage = ({ path, title, description }: LegalPageOptions) => {
   const pageUrl = `${SITE_URL}${path}`;
 
@@ -175,7 +167,6 @@ const legalPage = ({ path, title, description }: LegalPageOptions) => {
         name: `${title} | Owners Universe`,
         description,
         dateModified: "2026-09",
-        breadcrumb: { "@id": `${pageUrl}#breadcrumb` },
         publisher: ORG_REF,
         inLanguage: "en-US",
       },
@@ -192,9 +183,8 @@ const legalPage = ({ path, title, description }: LegalPageOptions) => {
 };
 
 const CONTACT_URL = `${SITE_URL}/contact`;
-const CONTACT_ORG_ID = `${CONTACT_URL}#organization`;
 
-/** /contact: the page, its breadcrumb, and the organization with its general and per-product support contact points. */
+/** /contact: the page, a minimal Organization, and the breadcrumb. */
 const CONTACT_SCHEMA = {
   "@context": CONTEXT,
   "@graph": [
@@ -205,9 +195,13 @@ const CONTACT_SCHEMA = {
       name: "Contact Us | Owners Universe",
       description:
         "Contact Owners Universe for account support, product questions, partnerships, investment inquiries, and general business inquiries.",
-      mainEntity: { "@id": CONTACT_ORG_ID },
-      breadcrumb: { "@id": `${CONTACT_URL}#breadcrumb` },
       inLanguage: "en-US",
+    },
+    {
+      "@type": "Organization",
+      "@id": ORGANIZATION_ID,
+      name: "Owners Universe",
+      url: `${SITE_URL}/`,
     },
     {
       "@type": "BreadcrumbList",
@@ -215,44 +209,6 @@ const CONTACT_SCHEMA = {
       itemListElement: [
         { "@type": "ListItem", position: 1, name: "Home", item: `${SITE_URL}/` },
         { "@type": "ListItem", position: 2, name: "Contact", item: CONTACT_URL },
-      ],
-    },
-    {
-      "@type": "Organization",
-      "@id": CONTACT_ORG_ID,
-      name: "Owners Universe",
-      url: `${SITE_URL}/`,
-      description: "Business software for service industries.",
-      address: {
-        "@type": "PostalAddress",
-        streetAddress: "4254 Normandy Ct",
-        addressLocality: "Fredericksburg",
-        addressRegion: "VA",
-        postalCode: "22408",
-        addressCountry: "US",
-      },
-      contactPoint: [
-        {
-          "@type": "ContactPoint",
-          contactType: "general inquiries",
-          email: "accounts@ownersuniverse.com",
-          availableLanguage: "English",
-        },
-        {
-          "@type": "ContactPoint",
-          contactType: "customer support",
-          email: "support@ownerspulse.com",
-          telephone: "+1-540-559-2908",
-          url: "https://ownerspulse.com/",
-          availableLanguage: "English",
-        },
-        {
-          "@type": "ContactPoint",
-          contactType: "customer support",
-          email: "support@ownersinventory.com",
-          url: "https://ownersinventory.com/",
-          availableLanguage: "English",
-        },
       ],
     },
   ],
@@ -327,7 +283,6 @@ const HOME_PAGE_NODE = {
   name: "Owners Universe",
   description:
     "Owners Universe provides purpose-built business software for service industries, including marketing automation for home services and POS and operations management for retail.",
-  isPartOf: WEBSITE_REF,
   about: ORG_REF,
   publisher: ORG_REF,
   inLanguage: "en-US",
@@ -347,14 +302,7 @@ export const SEO_SCHEMAS = {
 
   "3 - Products": PRODUCTS_SCHEMA,
 
-  "4 - About": page({
-    type: "AboutPage",
-    path: "/about",
-    name: "About Owners Universe",
-    description:
-      "Owners Universe builds dedicated, industry-specific business software for service companies. Learn about our story, products, and mission.",
-    crumbs: [{ name: "About", path: "/about" }],
-  }),
+  "4 - About": ABOUT_SCHEMA,
 
   "5 - Contact": CONTACT_SCHEMA,
 
@@ -373,8 +321,10 @@ const SITEWIDE = SEO_SCHEMAS["1 - Sitewide (Organization + WebSite)"];
 export const PAGE_SCHEMAS: Record<string, readonly object[]> = {
   "/": [SEO_SCHEMAS["2 - Homepage"]],
   "/products": [SITEWIDE, SEO_SCHEMAS["3 - Products"]],
-  "/about": [SITEWIDE, SEO_SCHEMAS["4 - About"]],
-  "/contact": [SITEWIDE, SEO_SCHEMAS["5 - Contact"]],
+  // About defines its own Organization (same @id as the sitewide one, with the brand list), so it skips the sitewide block.
+  "/about": [SEO_SCHEMAS["4 - About"]],
+  // Contact defines its own Organization (same @id as the sitewide one), so it skips the sitewide block.
+  "/contact": [SEO_SCHEMAS["5 - Contact"]],
   "/privacy": [SITEWIDE, SEO_SCHEMAS["6 - Privacy Policy"]],
   "/terms": [SITEWIDE, SEO_SCHEMAS["7 - Terms of Service"]],
   "/cookies": [SITEWIDE, SEO_SCHEMAS["8 - Cookie Policy"]],
