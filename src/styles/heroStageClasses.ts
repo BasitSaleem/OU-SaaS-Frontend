@@ -1,7 +1,7 @@
 /** Shared Tailwind class fragments for the Hero stage nodes — every dimension is `calc(N * var(--u))`
  * so the whole scene scales together; mobile collapses each node back into normal document flow. */
 export const NODE_BASE =
-  "absolute border border-black/[0.07] bg-white leading-[1.4] text-ink [border-radius:calc(18*var(--u))] [padding:calc(20*var(--u))] [font-size:calc(13*var(--u))] [will-change:transform,opacity] [box-shadow:0_1px_2px_rgba(11,11,11,0.04),0_calc(24*var(--u))_calc(60*var(--u))_calc(-20*var(--u))_rgba(11,11,11,0.18)] max-[900px]:!relative max-[900px]:!inset-auto max-[900px]:!h-auto max-[900px]:!w-full max-[900px]:!opacity-100 max-[900px]:![transform:none]";
+  "absolute border border-black/[0.07] bg-white leading-[1.4] text-ink [border-radius:calc(18*var(--u))] [padding:calc(20*var(--u))] [font-size:calc(13*var(--u))] [will-change:transform,opacity] [box-shadow:inset_0_1px_0_rgb(255_255_255/0.9),0_1px_2px_rgb(11_11_11/0.04),0_calc(8*var(--u))_calc(16*var(--u))_calc(-8*var(--u))_rgb(11_11_11/0.06),0_calc(28*var(--u))_calc(60*var(--u))_calc(-18*var(--u))_rgb(var(--tone-rgb)/0.32)] max-[900px]:!relative max-[900px]:!inset-auto max-[900px]:!h-auto max-[900px]:!w-full max-[900px]:!opacity-100 max-[900px]:![transform:none]";
 
 export const NODE_MOBILE_CONNECTOR =
   "max-[900px]:before:absolute max-[900px]:before:-top-[29px] max-[900px]:before:left-1/2 max-[900px]:before:h-7 max-[900px]:before:border-l max-[900px]:before:border-dashed max-[900px]:before:border-[#bdbdb8] max-[900px]:before:content-['']";

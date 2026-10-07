@@ -8,7 +8,7 @@ export const PRODUCTS_INTRO = {
 
 export interface ProductChapterData {
   index: 0 | 1;
-  num: string;
+  num?: string;
   category: string;
   productKey: ProductKey;
   logoAlt: string;
@@ -22,7 +22,7 @@ export interface ProductChapterData {
 export const PRODUCT_CHAPTERS: ProductChapterData[] = [
   {
     index: 0,
-    num: "01",
+    num: "1",
     category: "Marketing Automation for Home Services",
     productKey: "pulse",
     logoAlt: "Owners Pulse",
@@ -34,7 +34,7 @@ export const PRODUCT_CHAPTERS: ProductChapterData[] = [
   },
   {
     index: 1,
-    num: "02",
+    num: "2",
     category: "POS & Operations Management for Retail",
     productKey: "inventory",
     logoAlt: "Owners Inventory",

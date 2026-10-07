@@ -20,10 +20,10 @@ const ProductChapter = forwardRef<HTMLElement, ProductChapterProps>(({ data, chi
   return (
     <article ref={ref} data-index={data.index} aria-labelledby={`${data.productKey}-name`} className="flex min-h-screen items-center py-[12vh] max-[900px]:min-h-0 max-[900px]:py-6 max-[900px]:pt-[72px]">
       <div ref={innerRef} className={`flex flex-col items-start gap-7 ${reveal.className}`} style={reveal.style}>
-        <p className="flex items-center gap-3 font-mono text-xs tracking-[0.08em] text-neutral uppercase">
-          <span className="text-ink">{data.num}</span>
+        <p className="flex items-center gap-3">
+          {data.num && <span className="font-mono text-xs font-medium tracking-[0.08em] text-ink">{data.num}</span>}
           <span className="h-px w-6 bg-line" aria-hidden />
-          <span>{data.category}</span>
+          <span className="font-mono text-xs font-medium tracking-[0.08em] text-neutral uppercase">{data.category}</span>
         </p>
         <h3 id={`${data.productKey}-name`}>
           <Image src={PRODUCT_LOGOS[data.productKey]} alt={data.logoAlt} className="h-11 w-auto" />
@@ -35,7 +35,7 @@ const ProductChapter = forwardRef<HTMLElement, ProductChapterProps>(({ data, chi
           {data.tags.map((tag) => (
             <li
               key={tag}
-              className="rounded-full border border-line bg-white px-3 py-1.75 font-mono text-[11.5px] tracking-[0.06em] text-[#3d3d3d] transition-[border-color,transform] duration-[180ms] ease-[var(--ease-out)] hover:-translate-y-px hover:border-[#c9c9c4]"
+              className="rounded-full border border-line bg-white px-3.5 py-1.5 font-sans text-[14px] font-medium leading-[22px] text-[#2e2e2e] transition-[border-color,transform] duration-[180ms] ease-[var(--ease-out)] hover:-translate-y-px hover:border-[#c9c9c4]"
             >
               {tag}
             </li>
