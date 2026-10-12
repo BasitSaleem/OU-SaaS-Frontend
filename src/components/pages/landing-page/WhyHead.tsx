@@ -4,6 +4,7 @@ import { useRef } from "react";
 import ButtonInkPill from "@/components/button/ButtonInkPill";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
 import { CONTAINER } from "@/styles/sectionClasses";
+import { LOGIN_URL } from "@/constant/navigationData";
 import { WHY_LEAD } from "@/constant/whyData";
 
 const WhyHead: React.FC = () => {
@@ -27,7 +28,7 @@ const WhyHead: React.FC = () => {
         <p className="max-w-[34em] text-[clamp(17px,1.35vw,20px)] leading-[1.6] text-[#a3a3a0]" style={{ textWrap: "pretty" }}>
           {WHY_LEAD}
         </p>
-        <ButtonInkPill href="https://app.ownersuniverse.com/register" target="_blank" variant="light" size="lg" icon="arrow-up-right">
+        <ButtonInkPill href={LOGIN_URL} target="_blank" variant="light" size="lg" icon="arrow-up-right">
           Create Your Account
         </ButtonInkPill>
       </div>
