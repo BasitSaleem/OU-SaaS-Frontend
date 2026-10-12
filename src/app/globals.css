@@ -1,8 +1,8 @@
 @import "tailwindcss";
 
 @theme inline {
-  --font-heading: var(--font-outfit);
-  --font-sans: var(--font-dm-sans);
+  --font-heading: var(--font-geist); /* Geist everywhere: heading, sans and display all resolve to the same family */
+  --font-sans: var(--font-geist);
   --font-display: var(--font-geist);
   --font-mono: var(--font-geist-mono);
 

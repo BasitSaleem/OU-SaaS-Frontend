@@ -14,8 +14,9 @@ const MainHeading = forwardRef<HTMLHeadingElement, MainHeadingProps>(
       ref={ref}
       style={style}
       className={clsx(
-        "font-bold font-heading text-charcoal tracking-[-0.5px] leading-[1.3] lg:leading-[60px] xl:leading-[76px]",
-        "text-[32px] md:text-[36px] lg:text-[48px]",
+        // Section title: 36px mobile, 37px tablet (md), 64px desktop (lg and up), in the site's heading style (Geist, semibold, ink).
+        "font-display font-semibold text-ink tracking-[-0.04em] leading-[1.05] [text-wrap:balance]",
+        "text-[36px] md:text-[37px] lg:text-[64px]",
         className
       )}
       {...props}

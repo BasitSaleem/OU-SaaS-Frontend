@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Reveal from "@/components/common-components/Reveal";
+import MainHeading from "@/components/pages/typography/MainHeading";
 import { CONTAINER } from "@/styles/sectionClasses";
 
 const BusinessInfoStrip: React.FC = () => {
@@ -21,9 +22,9 @@ const BusinessInfoStrip: React.FC = () => {
     <section className="pb-[clamp(88px,11vw,140px)]" aria-labelledby="cbiz-title">
       <div className={CONTAINER}>
         <Reveal mode="rise">
-          <h2 id="cbiz-title" className="mb-[clamp(28px,3.5vw,44px)] text-[clamp(32px,4vw,56px)] font-semibold leading-[1.05] tracking-[-0.04em] text-[#0b0b0b] [text-wrap:balance]">
+          <MainHeading id="cbiz-title" className="mb-[clamp(28px,3.5vw,44px)]">
             Business Information
-          </h2>
+          </MainHeading>
 
           <div className="grid grid-cols-3 border-t border-[#e4e4e0] max-[760px]:grid-cols-1">
             {/* Address */}

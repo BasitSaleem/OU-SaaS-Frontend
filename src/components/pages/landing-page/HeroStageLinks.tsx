@@ -5,7 +5,7 @@ const LINK_PACKET = `${PATH_BASE} stroke-coral [stroke-dasharray:70_1100] [strok
 
 /** Static connection paths between the stage nodes; --b/--c drive the draw/packet animation via CSS. */
 const HeroStageLinks: React.FC = () => (
-  <svg className="absolute inset-0 h-full w-full overflow-visible max-[900px]:hidden" viewBox="0 0 1200 620" preserveAspectRatio="none" aria-hidden>
+  <svg className="absolute inset-0 h-full w-full overflow-visible max-[1023px]:hidden" viewBox="0 0 1200 620" preserveAspectRatio="none" aria-hidden>
     <g>
       <path d="M 450 250 C 415 250, 415 196, 380 196" pathLength={1000} className={LINK_BASE} />
       <path d="M 450 250 C 415 250, 415 196, 380 196" pathLength={1000} className={LINK_DRAW} style={{ strokeDashoffset: "calc((1 - var(--b)) * 1000)" }} />

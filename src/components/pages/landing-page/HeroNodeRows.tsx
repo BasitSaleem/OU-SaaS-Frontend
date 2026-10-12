@@ -14,7 +14,7 @@ const HeroNodeRows: React.FC<{ rows: HeroNodeRow[] }> = ({ rows }) => (
     {rows.map((row) => (
       <li key={row.text} className={NODE_ROW_ITEM}>
         <span className={clsx(NODE_ROW_ICON_BOX, row.warn && NODE_ROW_ICON_BOX_WARN)}>
-          <HeroNodeIcon name={row.icon} className="[height:calc(13*var(--u))] [width:calc(13*var(--u))]" />
+          <HeroNodeIcon name={row.icon} strokeWidth={2.5} className="[height:calc(13*var(--u))] [width:calc(13*var(--u))]" />
         </span>
         {row.text}
       </li>

@@ -1,5 +1,6 @@
 "use client";
 
+import MainHeading from "@/components/pages/typography/MainHeading";
 import { useRevealOnce } from "@/hooks/useRevealOnce";
 import { CONTAINER } from "@/styles/sectionClasses";
 import { ABOUT_VALUES, ABOUT_VALUES_TITLE } from "@/constant/aboutData";
@@ -19,12 +20,9 @@ const AboutValues: React.FC = () => {
       className="pb-[clamp(96px,12vw,150px)]"
     >
       <div className={CONTAINER}>
-        <h2
-          id="avalues-title"
-          className="mb-[clamp(32px,4vw,48px)] text-[clamp(32px,4vw,56px)] font-semibold leading-[1.05] tracking-[-0.04em] text-ink [text-wrap:balance]"
-        >
+        <MainHeading id="avalues-title" className="mb-[clamp(32px,4vw,48px)]">
           {ABOUT_VALUES_TITLE}
-        </h2>
+        </MainHeading>
 
         <ol
           ref={ref}

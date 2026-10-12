@@ -35,7 +35,7 @@ const ProductChapter = forwardRef<HTMLElement, ProductChapterProps>(({ data, chi
           {data.tags.map((tag) => (
             <li
               key={tag}
-              className="rounded-full border border-line bg-white px-3.5 py-1.5 font-sans text-[14px] font-medium leading-[22px] text-[#2e2e2e] transition-[border-color,transform] duration-[180ms] ease-[var(--ease-out)] hover:-translate-y-px hover:border-[#c9c9c4]"
+              className="rounded-full border border-line bg-white px-3.5 py-1.5 font-display text-[14px] font-medium leading-[22px] text-[#2e2e2e] transition-[border-color,transform] duration-[180ms] ease-[var(--ease-out)] hover:-translate-y-px hover:border-[#c9c9c4]"
             >
               {tag}
             </li>

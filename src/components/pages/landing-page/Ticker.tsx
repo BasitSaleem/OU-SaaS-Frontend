@@ -19,11 +19,11 @@ const Ticker: React.FC = () => {
         aria-label="Owners Universe at a glance"
         className="flex w-max translate-x-[calc(var(--p)*-38%)] gap-[clamp(28px,4vw,56px)] will-change-transform"
       >
-        {TICKER_ITEMS.map((label, i) => (
-          <TickerItem key={label} label={label} index={i} />
+        {TICKER_ITEMS.map((label) => (
+          <TickerItem key={label} label={label} />
         ))}
-        {TICKER_ITEMS.map((label, i) => (
-          <TickerItem key={`${label}-dup`} label={label} index={i + TICKER_ITEMS.length} hidden />
+        {TICKER_ITEMS.map((label) => (
+          <TickerItem key={`${label}-dup`} label={label} hidden />
         ))}
       </ul>
     </div>

@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import Reveal from "@/components/common-components/Reveal";
 import RecaptchaField from "@/components/common-components/RecaptchaField";
 import { submitLeadAction } from "@/actions/submitLead";
+import MainHeading from "@/components/pages/typography/MainHeading";
 import { CONTAINER } from "@/styles/sectionClasses";
 import { CONTACT_TOPICS } from "@/constant/contactData";
 
@@ -97,9 +98,9 @@ const ContactFormSection: React.FC = () => {
         <Reveal mode="rise">
           <div className="grid grid-cols-[minmax(0,4fr)_minmax(0,8fr)] gap-[clamp(28px,5vw,72px)] rounded-[28px] border border-[#e4e4e0] bg-white p-[clamp(28px,4.5vw,56px)] shadow-[0_1px_2px_rgba(11,11,11,0.04),0_30px_70px_-40px_rgba(11,11,11,0.25)] max-[1000px]:grid-cols-1">
             <div className="cform__head">
-              <h2 id="cform-title" className="text-[clamp(32px,4vw,56px)] font-semibold leading-[1.05] tracking-[-0.04em] text-[#0b0b0b] [text-wrap:balance]">
+              <MainHeading id="cform-title">
                 Send us a message
-              </h2>
+              </MainHeading>
             </div>
 
             <div>

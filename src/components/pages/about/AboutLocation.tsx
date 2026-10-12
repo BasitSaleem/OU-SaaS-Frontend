@@ -1,5 +1,6 @@
 import Reveal from "@/components/common-components/Reveal";
 import CopyTextButton from "@/components/common-components/CopyTextButton";
+import MainHeading from "@/components/pages/typography/MainHeading";
 import { CONTAINER } from "@/styles/sectionClasses";
 import {
   ABOUT_LOCATION_ADDRESS_STRING,
@@ -38,12 +39,9 @@ const AboutLocation: React.FC = () => (
       >
         {/* Left: copy text */}
         <div className="flex flex-col gap-5">
-          <h2
-            id="abased-title"
-            className="text-[clamp(32px,4vw,56px)] font-semibold leading-[1.05] tracking-[-0.04em] text-ink [text-wrap:balance]"
-          >
+          <MainHeading id="abased-title">
             {ABOUT_LOCATION_TITLE}
-          </h2>
+          </MainHeading>
           <p className="text-[clamp(18px,1.8vw,24px)] leading-[1.45] tracking-[-0.02em] text-neutral [text-wrap:pretty]">
             {ABOUT_LOCATION_DESC}
           </p>

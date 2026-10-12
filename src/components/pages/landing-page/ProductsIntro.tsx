@@ -17,7 +17,7 @@ const ProductsIntro: React.FC = () => {
     >
       <h2
         id="products-title"
-        className="flex flex-col text-[clamp(48px,8.4vw,124px)] leading-[0.94] font-semibold tracking-[-0.055em]"
+        className="flex flex-col text-[clamp(48px,8.4vw,120px)] md:text-[64px] lg:text-[clamp(48px,8.4vw,120px)] leading-[0.94] font-semibold tracking-[-0.055em]"
       >
         {PRODUCTS_INTRO.title}
       </h2>

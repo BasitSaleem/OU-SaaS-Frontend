@@ -8,6 +8,7 @@ import { NODE_BASE, NODE_HEAD, NODE_MOBILE_CONNECTOR, NODE_ROLE, NODE_ROLE_DOT }
 
 const HeroStageNodePulse: React.FC = () => (
   <article
+    data-stage-node
     className={`${NODE_BASE} ${NODE_MOBILE_CONNECTOR} top-[calc(60*var(--u))] left-[calc(20*var(--u))] flex h-[calc(284*var(--u))] w-[calc(340*var(--u))] flex-col gap-[calc(12*var(--u))]`}
     style={
       {

@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Reveal from "@/components/common-components/Reveal";
+import MainHeading from "@/components/pages/typography/MainHeading";
 import { CONTAINER } from "@/styles/sectionClasses";
 
 const ContactInvestors: React.FC = () => {
@@ -39,9 +40,9 @@ const ContactInvestors: React.FC = () => {
           <div className="grid grid-cols-[minmax(0,7fr)_minmax(0,5fr)] items-center gap-[clamp(28px,5vw,72px)] rounded-[28px] bg-[#0b0b0b] p-[clamp(32px,5vw,60px)] text-[#f7f7f5] max-[1000px]:grid-cols-1">
             {/* Left Column */}
             <div>
-              <h2 id="cpart-title" className="text-[clamp(32px,4vw,56px)] font-semibold leading-[1.05] tracking-[-0.04em] text-[#f7f7f5] [text-wrap:balance]">
+              <MainHeading id="cpart-title" className="text-paper!">
                 Investors &amp; Partnerships
-              </h2>
+              </MainHeading>
               <p className="mt-4 text-[clamp(18px,1.8vw,24px)] leading-[1.45] tracking-[-0.02em] text-[#a3a3a0]">
                 Interested in partnership opportunities or investment discussions? Reach out to our team directly.
               </p>

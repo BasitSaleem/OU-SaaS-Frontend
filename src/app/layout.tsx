@@ -1,22 +1,9 @@
 import type { Metadata } from "next";
-import { DM_Sans, Geist, Geist_Mono, Outfit } from "next/font/google";
+import { Geist, Geist_Mono } from "next/font/google";
 import Navbar from "@/components/pages/navbar/Navbar";
 import CustomCursor from "@/components/CustomCursor";
 import SchemaHead from "@/components/common-components/SchemaHead";
 import "./globals.css";
-
-const outfit = Outfit({
-  subsets: ["latin"],
-  weight: ["400", "500", "600", "700", "800"],
-  variable: "--font-outfit",
-});
-
-const dmSans = DM_Sans({
-  subsets: ["latin"],
-  weight: ["400", "500", "700"],
-  style: ["normal", "italic"],
-  variable: "--font-dm-sans",
-});
 
 const geist = Geist({
   subsets: ["latin"],
@@ -44,7 +31,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html
       lang="en"
       data-scroll-behavior="smooth"
-      className={`${outfit.variable} ${dmSans.variable} ${geist.variable} ${geistMono.variable}`}
+      className={`${geist.variable} ${geistMono.variable}`}
     >
       <head>
         <SchemaHead />

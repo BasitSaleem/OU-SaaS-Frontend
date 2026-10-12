@@ -1,5 +1,6 @@
 "use client";
 
+import MainHeading from "@/components/pages/typography/MainHeading";
 import { useRevealOnce } from "@/hooks/useRevealOnce";
 import { CONTAINER } from "@/styles/sectionClasses";
 import { ABOUT_STATS, ABOUT_STATS_TITLE } from "@/constant/aboutData";
@@ -21,12 +22,10 @@ const AboutStats: React.FC = () => {
       className="rounded-[var(--r-xl)] bg-ink py-[clamp(80px,10vw,128px)] text-paper"
     >
       <div className={CONTAINER}>
-        <h2
-          id="anumbers-title"
-          className="text-[clamp(32px,4vw,56px)] font-semibold leading-[1.05] tracking-[-0.04em] text-paper [text-wrap:balance]"
-        >
+        {/* Light text on the dark section; "!" makes it win over MainHeading's default ink colour. */}
+        <MainHeading id="anumbers-title" className="text-paper!">
           {ABOUT_STATS_TITLE}
-        </h2>
+        </MainHeading>
 
         <ul
           ref={ref}

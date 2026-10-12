@@ -33,8 +33,8 @@ const ICON_PATHS: Record<string, React.ReactNode> = {
 
 export type HeroNodeIconKey = keyof typeof ICON_PATHS;
 
-const HeroNodeIcon: React.FC<{ name: HeroNodeIconKey; className?: string }> = ({ name, className }) => (
-  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={name === "check" || name === "trend" ? 2.25 : 1.75} strokeLinecap="round" strokeLinejoin="round" className={className} aria-hidden>
+const HeroNodeIcon: React.FC<{ name: HeroNodeIconKey; className?: string; strokeWidth?: number }> = ({ name, className, strokeWidth }) => (
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={strokeWidth ?? (name === "check" || name === "trend" ? 2.25 : 1.75)} strokeLinecap="round" strokeLinejoin="round" className={className} aria-hidden>
     {ICON_PATHS[name]}
   </svg>
 );

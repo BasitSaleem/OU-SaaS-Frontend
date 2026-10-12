@@ -3,7 +3,7 @@ import clsx from "clsx";
 const LINE_SPAN = "inline-block transition-transform duration-[1200ms] ease-[var(--ease-out)]";
 
 const FinalTitle: React.FC<{ isIn: boolean }> = ({ isIn }) => (
-  <h2 id="final-title" className="flex flex-col text-[clamp(64px,13vw,208px)] leading-[0.9] font-semibold tracking-[-0.065em]">
+  <h2 id="final-title" className="flex flex-col text-[clamp(64px,13vw,186px)] leading-[0.9] font-semibold tracking-[-0.065em]">
     <span className="block overflow-hidden pb-[0.1em] -mb-[0.1em]">
       <span
         className={clsx(

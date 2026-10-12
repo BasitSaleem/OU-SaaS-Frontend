@@ -26,7 +26,9 @@ function smoothPath(points: [number, number][]): string {
 }
 
 const HeroSparkline: React.FC<HeroSparklineProps> = ({ linePoints }) => {
-  const gradientId = useId();
+  const id = useId().replace(/:/g, "");
+  const gradientId = `${id}-fill`;
+  const clipId = `${id}-reveal`;
   const points = linePoints.split(" ").map((p) => p.split(",").map(Number) as [number, number]);
   const line = smoothPath(points);
   const area = `${line} L ${points[points.length - 1][0]} ${H} L ${points[0][0]} ${H} Z`;
@@ -40,13 +42,23 @@ const HeroSparkline: React.FC<HeroSparklineProps> = ({ linePoints }) => {
             <stop offset="0" stopColor="#f95c5b" stopOpacity="0.2" />
             <stop offset="1" stopColor="#f95c5b" stopOpacity="0" />
           </linearGradient>
+          {/* The line is revealed by a window that widens left to right with --b. A dash offset was used before, but
+              with a non-uniformly stretched chart it stopped short of the end. The 4-unit margins keep the round caps. */}
+          <clipPath id={clipId}>
+            <rect
+              x={-4}
+              y={-20}
+              width={W + 8}
+              height={H + 40}
+              style={{ transformBox: "fill-box", transformOrigin: "0% 50%", transform: "scaleX(var(--b))" }}
+            />
+          </clipPath>
         </defs>
         <path d={area} fill={`url(#${gradientId})`} className="stroke-none" style={{ opacity: "var(--b)" }} />
         <path
           d={line}
-          pathLength={1}
+          clipPath={`url(#${clipId})`}
           className="fill-none stroke-coral [stroke-linecap:round] [stroke-linejoin:round] [stroke-width:2] [vector-effect:non-scaling-stroke]"
-          style={{ strokeDasharray: 1, strokeDashoffset: "calc(1 - var(--b))" }}
         />
       </svg>
       <span

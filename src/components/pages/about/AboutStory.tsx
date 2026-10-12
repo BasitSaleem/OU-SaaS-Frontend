@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef } from "react";
+import MainHeading from "@/components/pages/typography/MainHeading";
 import { CONTAINER } from "@/styles/sectionClasses";
 import { ABOUT_STORY_PARAGRAPHS, ABOUT_STORY_TITLE } from "@/constant/aboutData";
 
@@ -56,12 +57,9 @@ const AboutStory: React.FC = () => {
       >
         {/* Sticky heading — un-stickied below 900 px */}
         <div className="sticky top-[120px] max-[900px]:static">
-          <h2
-            id="astory-title"
-            className="text-[clamp(32px,4vw,56px)] font-semibold leading-[1.05] tracking-[-0.04em] text-ink [text-wrap:balance]"
-          >
+          <MainHeading id="astory-title">
             {ABOUT_STORY_TITLE}
-          </h2>
+          </MainHeading>
         </div>
 
         {/* Paragraphs — lightup when their top crosses 62% vh */}
